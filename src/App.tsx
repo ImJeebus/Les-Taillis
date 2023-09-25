@@ -14,35 +14,16 @@ import Profile from './components/Profile';
 import AddTaskModal from './components/Tasks/AddTaskModal';
 import EditTaskModal from './components/Tasks/EditTaskModal';
 
-import NewPageTest from './pages/NewPageTest';
-
 export const App = () => {
-  const [activePage, setActivePage] = useState('home');
   const [userValue, setUserValue] = useState(null);
-  const [areaButtonValue, setAreaButtonValue] = useState(null);
   const [profileColour, setProfileColour] = useState(null);
 
   const handleUserButton = (value, colour) => {
     setUserValue(value);
-    setActivePage('area');
     setProfileColour(colour);
   };
 
-  const handleAreaButtonClick = (value) => {
-    setAreaButtonValue(value);
-    setActivePage('taskList');
-  };
-
   console.log('User Value is:', userValue);
-
-  const pages = {
-    home: <Home handleUserButton={handleUserButton} />,
-    // home: <Home />,
-    area: <Area handleAreaButtonClick={handleAreaButtonClick} />,
-    taskList: (
-      <TaskList areaButtonValue={areaButtonValue} userValue={userValue} />
-    ),
-  };
 
   const selectedItem = {
     title: 'Sample Title',
@@ -53,26 +34,24 @@ export const App = () => {
   return (
     // <UserProvider>
     <Router>
+      <NavBar userValue={userValue} profileColour={profileColour} />
       <Routes>
-        <Route path="/" element={<Home handleUserButton={handleUserButton}  />} />
-        <Route path="/newpagetest" element={<NewPageTest />} />
+        <Route
+          path="/"
+          element={<Home handleUserButton={handleUserButton} />}
+        />
+        <Route path="/area" element={<Area />} />
+        <Route
+          path="/tasklist/:value"
+          element={<TaskList userValue={userValue} />}
+        />
       </Routes>
+
       <div>
         {/* <EditTaskModal isOpen={true} selectedItem={selectedItem} /> */}
         {/* <AddTaskModal /> */}
         {/* <TaskList areaButtonValue="mainHouse" /> */}
-        <NavBar
-          activePage={activePage}
-          setActivePage={setActivePage}
-          userValue={userValue}
-          profileColour={profileColour}
-        />
         {/* {pages[activePage]} */}
-        <div>
-          <button>
-            <Link to="/newpagetest">NEWPAGE</Link>
-          </button>
-        </div>
       </div>
     </Router>
     // </UserProvider>

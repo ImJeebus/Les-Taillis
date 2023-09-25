@@ -4,6 +4,7 @@ import AddTaskModal from './../components/Tasks/AddTaskModal';
 import EditTaskModal from './../components/Tasks/EditTaskModal';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { firestore } from './../firebase';
+import { Link, useParams } from 'react-router-dom';
 import {
   doc,
   collection,
@@ -13,7 +14,8 @@ import {
 } from 'firebase/firestore';
 import { v4 as uuid } from 'uuid';
 
-const TaskList = ({ areaButtonValue, userValue }) => {
+const TaskList = () => {
+  const { value } = useParams();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const openAddModal = () => {
     setIsAddModalOpen(true);
@@ -51,7 +53,7 @@ const TaskList = ({ areaButtonValue, userValue }) => {
   const fetchData = async () => {
     try {
       const querySnapshot = await getDocs(
-        collection(firestore, 'tasks', areaButtonValue, areaButtonValue)
+        collection(firestore, 'tasks', value, value)
       );
       const data = querySnapshot.docs.map((doc) => doc.data());
 
@@ -63,7 +65,7 @@ const TaskList = ({ areaButtonValue, userValue }) => {
       });
       const updatedDict = {
         ...itemsDict,
-        [areaButtonValue]: updatedAreaItems,
+        [value]: updatedAreaItems,
       };
       setItemsDict(updatedDict);
     } catch (error) {
@@ -73,20 +75,17 @@ const TaskList = ({ areaButtonValue, userValue }) => {
 
   useEffect(() => {
     fetchData();
-  }, [areaButtonValue]);
+  }, [value]);
 
   const addItem = async ({ title, description }) => {
     if (title.trim() !== '') {
       // add to firestore
       try {
-        await addDoc(
-          collection(firestore, 'tasks', areaButtonValue, areaButtonValue),
-          {
-            title: title,
-            description: description,
-            addedBy: userValue,
-          }
-        );
+        await addDoc(collection(firestore, 'tasks', value, value), {
+          title: title,
+          description: description,
+          // addedBy: userValue,
+        });
         fetchData();
       } catch (error) {
         console.log(error);
@@ -98,12 +97,12 @@ const TaskList = ({ areaButtonValue, userValue }) => {
   };
 
   const removeItem = async (index) => {
-    const currentItems = itemsDict[areaButtonValue] || [];
+    const currentItems = itemsDict[value] || [];
     const itemToRemove = currentItems[index];
-    console.log('curr indec', currentItems[index]);
+    console.log('curr index', currentItems[index]);
     try {
       const querySnapshot = await getDocs(
-        collection(firestore, 'tasks', areaButtonValue, areaButtonValue)
+        collection(firestore, 'tasks', value, value)
       );
       const matchingDocs = querySnapshot.docs.filter(
         (doc) =>
@@ -131,7 +130,7 @@ const TaskList = ({ areaButtonValue, userValue }) => {
 
   return (
     <div className="taskContainer">
-      <h1>{Titles[areaButtonValue]}</h1>
+      <h1>{Titles[value]}</h1>
       <div className="createTask">
         <button className="createTaskButton" onClick={openAddModal}>
           {
@@ -144,7 +143,7 @@ const TaskList = ({ areaButtonValue, userValue }) => {
         <AddTaskModal
           isOpen={isAddModalOpen}
           onClose={closeAddModal}
-          areaButtonValue={areaButtonValue}
+          areaButtonValue={value}
           addItem={addItem}
           newItem={newItem}
           setNewItem={setNewItem}
@@ -154,7 +153,7 @@ const TaskList = ({ areaButtonValue, userValue }) => {
       </div>
       <div className="taskListContainer">
         <ul className="taskListSection">
-          {(itemsDict[areaButtonValue] || []).map((item, index) => (
+          {(itemsDict[value] || []).map((item, index) => (
             <li className="taskList" key={index}>
               {/* <div className="taskBox"> */}
               <button

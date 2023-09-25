@@ -2,37 +2,23 @@ import React, { useState } from 'react';
 import './NavBar.css';
 import { BiHomeAlt, BiBorderNone, BiTask } from 'react-icons/bi';
 import Profile from './Profile';
+import { Link, useLocation } from 'react-router-dom';
 
-const NavBar = ({ activePage, setActivePage, userValue, profileColour }) => {
-  const handleNavClick = (page) => {
-    setActivePage(page);
-  };
-
+const NavBar = ({ userValue, profileColour }) => {
+  const location = useLocation();
   return (
     <div className="navBarContainer">
-      {activePage !== 'home' && (
-        <div
-          className={`navBarHome${activePage === 'home' ? ' active' : ''}`}
-          onClick={() => handleNavClick('home')}
-        >
+      {location.pathname !== '/' && (
+        <Link to="/" className="navBarHome">
           <BiHomeAlt />
-        </div>
+        </Link>
       )}
-      {activePage !== 'home' && activePage !== 'area' && (
-        <div
-          className={`navBarArea${activePage === 'area' ? ' active' : ''}`}
-          onClick={() => handleNavClick('area')}
-        >
+      {location.pathname !== '/' && location.pathname !== '/area' && (
+        <Link to="/area" className="navBarArea">
           <BiBorderNone />
-        </div>
+        </Link>
       )}
-      {/* <div
-        className={`navBarTask${activePage === 'taskList' ? ' active' : ''}`}
-        onClick={() => handleNavClick('taskList')}
-      >
-        <BiTask />
-      </div> */}
-      {activePage !== 'home' && (
+      {location.pathname !== '/' && (
         <div className="userProfile">
           <Profile userValue={userValue} profileColour={profileColour} />
         </div>
