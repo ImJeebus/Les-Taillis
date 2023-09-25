@@ -4,8 +4,9 @@ import { BiHomeAlt, BiBorderNone, BiTask } from 'react-icons/bi';
 import Profile from './Profile';
 import { Link, useLocation } from 'react-router-dom';
 
-const NavBar = ({ userValue, profileColour }) => {
+const NavBar = () => {
   const location = useLocation();
+
   return (
     <div className="navBarContainer">
       {location.pathname !== '/' && (
@@ -20,7 +21,7 @@ const NavBar = ({ userValue, profileColour }) => {
       )}
       {location.pathname !== '/' && (
         <div className="userProfile">
-          <Profile userValue={userValue} profileColour={profileColour} />
+          <Profile />
         </div>
       )}
     </div>

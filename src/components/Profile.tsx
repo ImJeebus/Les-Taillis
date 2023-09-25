@@ -1,11 +1,18 @@
 import React from 'react';
 import './Profile.css';
 
-const Profile = ({ userValue, profileColour }) => {
+const Profile = () => {
   return (
     <div className="profileContainer">
-      <div className="profileBubble" style={{ backgroundColor: profileColour }}>
-        {userValue}
+      <div
+        className="profileBubble"
+        style={
+          {
+            /* backgroundColor: profileColour */
+          }
+        }
+      >
+        {/* {user} */}
       </div>
     </div>
   );

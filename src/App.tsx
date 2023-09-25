@@ -15,36 +15,20 @@ import AddTaskModal from './components/Tasks/AddTaskModal';
 import EditTaskModal from './components/Tasks/EditTaskModal';
 
 export const App = () => {
-  const [userValue, setUserValue] = useState(null);
-  const [profileColour, setProfileColour] = useState(null);
-
-  const handleUserButton = (value, colour) => {
-    setUserValue(value);
-    setProfileColour(colour);
-  };
-
-  console.log('User Value is:', userValue);
-
-  const selectedItem = {
-    title: 'Sample Title',
-    description: 'Sample Description',
-    addedBy: 'Sample User',
-  };
+  // const selectedItem = {
+  //   title: 'Sample Title',
+  //   description: 'Sample Description',
+  //   addedBy: 'Sample User',
+  // };
 
   return (
     // <UserProvider>
     <Router>
-      <NavBar userValue={userValue} profileColour={profileColour} />
+      <NavBar />
       <Routes>
-        <Route
-          path="/"
-          element={<Home handleUserButton={handleUserButton} />}
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/area" element={<Area />} />
-        <Route
-          path="/tasklist/:value"
-          element={<TaskList userValue={userValue} />}
-        />
+        <Route path="/tasklist/:value" element={<TaskList />} />
       </Routes>
 
       <div>

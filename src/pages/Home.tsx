@@ -3,7 +3,7 @@ import './Home.css';
 import { useUser } from '../UserContext';
 import { Link } from 'react-router-dom';
 
-const Home = ({ handleUserButton }) => {
+const Home = () => {
   const users = [
     { value: 'eddie', text: 'Eddie' },
     { value: 'lucia', text: 'Lucia' },
