@@ -22,22 +22,22 @@ export const App = () => {
   // };
 
   return (
-    // <UserProvider>
-    <Router>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/area" element={<Area />} />
-        <Route path="/tasklist/:value" element={<TaskList />} />
-      </Routes>
+    <UserProvider>
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/area" element={<Area />} />
+          <Route path="/tasklist/:value" element={<TaskList />} />
+        </Routes>
 
-      <div>
-        {/* <EditTaskModal isOpen={true} selectedItem={selectedItem} /> */}
-        {/* <AddTaskModal /> */}
-        {/* <TaskList areaButtonValue="mainHouse" /> */}
-        {/* {pages[activePage]} */}
-      </div>
-    </Router>
-    // </UserProvider>
+        <div>
+          {/* <EditTaskModal isOpen={true} selectedItem={selectedItem} /> */}
+          {/* <AddTaskModal /> */}
+          {/* <TaskList areaButtonValue="mainHouse" /> */}
+          {/* {pages[activePage]} */}
+        </div>
+      </Router>
+    </UserProvider>
   );
 };

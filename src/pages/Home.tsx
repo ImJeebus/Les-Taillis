@@ -1,30 +1,30 @@
-import React, { useState } from 'react';
+// Home.tsx
+import React from 'react';
 import './Home.css';
 import { useUser } from '../UserContext';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const users = [
-    { value: 'eddie', text: 'Eddie' },
-    { value: 'lucia', text: 'Lucia' },
-    { value: 'gma', text: 'Gma' },
-    { value: 'sarah', text: 'Sarah' },
-    { value: 'lino', text: 'Lino' },
-    { value: 'elisa', text: 'Elisa' },
-  ];
+  const { setSelectedUser, users } = useUser();
+
+  const handleUserClick = (user: User) => {
+    setSelectedUser(user.value);
+  };
 
   return (
     <div>
       <h1>Les Taillis</h1>
       <div className="buttonContainer">
         <div className="buttonGrid">
-          {users.map(({ value, text }) => (
+          {users.map((user) => (
             <Link
-              key={value}
+              key={user.value}
               to={`/area`}
-              className={`homeButton ${value}Button`}
+              className={`homeButton ${user.value}Button`}
+              onClick={() => handleUserClick(user)}
+              style={{ backgroundColor: user.color }} // Set the background color
             >
-              {text}
+              {user.text}
             </Link>
           ))}
         </div>

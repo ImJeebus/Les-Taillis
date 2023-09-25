@@ -12,9 +12,16 @@ import {
   deleteDoc,
   getDocs,
 } from 'firebase/firestore';
+import { useUser } from '../UserContext';
+
 import { v4 as uuid } from 'uuid';
 
 const TaskList = () => {
+  const { selectedUser, users } = useUser();
+  const selectedUserText = users.find(
+    (user) => user.value === selectedUser
+  )?.text;
+  console.log('selectedUser', selectedUserText);
   const { value } = useParams();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const openAddModal = () => {
@@ -84,7 +91,7 @@ const TaskList = () => {
         await addDoc(collection(firestore, 'tasks', value, value), {
           title: title,
           description: description,
-          // addedBy: userValue,
+          addedBy: selectedUserText,
         });
         fetchData();
       } catch (error) {
