@@ -1,18 +1,32 @@
 import React, { useState } from 'react';
 import { UserProvider } from './UserContext';
+import { useUser } from './UserContext';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
-import styles from './App.module.css';
 import 'tailwindcss/tailwind.css';
 
-import './style.css';
+import './App.css';
 import Home from './pages/Home';
 import Area from './pages/Area';
 import TaskList from './pages/TaskList';
 import NavBar from './components/NavBar';
-import Profile from './components/Profile';
-import AddTaskModal from './components/Tasks/AddTaskModal';
-import EditTaskModal from './components/Tasks/EditTaskModal';
+
+const PageProperties = ({ component: Component }) => {
+  const { selectedUser, users } = useUser();
+  const user = users.find((u) => u.value === selectedUser);
+  const userColor = user ? user.color : 'rgba(80, 187, 251, 1)'; // Default color
+
+  return (
+    <div
+      className="PageProperties"
+      style={{
+        background: `linear-gradient(0deg, ${userColor} 0%, rgba(255, 255, 255, 1) 100%)`,
+      }}
+    >
+      {Component}
+    </div>
+  );
+};
 
 export const App = () => {
   // const selectedItem = {
@@ -27,8 +41,14 @@ export const App = () => {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/area" element={<Area />} />
-          <Route path="/tasklist/:value" element={<TaskList />} />
+          <Route
+            path="/area"
+            element={<PageProperties component={<Area />} />}
+          />
+          <Route
+            path="/tasklist/:value"
+            element={<PageProperties component={<TaskList />} />}
+          />
         </Routes>
 
         <div>

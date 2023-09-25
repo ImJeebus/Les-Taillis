@@ -38,7 +38,7 @@ h1 {
   text-align: center; /* Center text within the buttons */
   margin: 5px; /* Adjust this for spacing between buttons */
   border-radius: 50%;
-  transition: background-color 0.2s; /* Add a transition effect for smooth color change */
+  transition: background-color 0.2s transform 0.2s; /* Add a transition effect for smooth color change */
   border: none;
   text-decoration: none;
   line-height: 100px;
@@ -47,33 +47,11 @@ h1 {
 .homeButton:hover {
   filter: saturate(2);
   cursor: pointer;
+  transform: scale(1.05); /* Scale up on hover */
 }
 
 .homeButton:active {
   filter: brightness(0.9);
   cursor: pointer;
+  transform: scale(0.9); /* Scale down on click */
 }
-
-/* .eddieButton {
-  background-color: lightblue;
-}
-
-.luciaButton {
-  background-color: lightskyblue;
-}
-
-.gmaButton {
-  background-color: lightgreen;
-}
-
-.sarahButton {
-  background-color: lightpink;
-}
-
-.linoButton {
-  background-color: lightseagreen;
-}
-
-.elisaButton {
-  background-color: lightsalmon;
-} */

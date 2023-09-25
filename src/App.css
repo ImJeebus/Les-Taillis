@@ -8,3 +8,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f6f6f6;
 }
+
+.PageProperties {
+  transition: background-color 3s ease; /* Add transition effect for the background */
+}
