@@ -1,0 +1,28 @@
+{
+  "name": "stackblitz-starters-4h5lds",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7",
+    "@types/uuid": "^9.0.4",
+    "firebase": "^10.4.0",
+    "firebase/app": "*",
+    "postcss": "^8.4.30",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.11.0",
+    "react-router-dom": "^6.16.0",
+    "tailwindcss": "latest",
+    "uuid": "^9.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-scripts": "latest"
+  }
+}

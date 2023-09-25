@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 50px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  color: darkslategrey;
+  margin: 0;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+}
+
+#homeButton {
+  font-size: 21px;
+  color: white;
+  height: 100px;
+  width: 100px; /* Set a fixed width for the buttons */
+  text-align: center; /* Center text within the buttons */
+  margin: 5px; /* Adjust this for spacing between buttons */
+  border-radius: 50%;
+  transition: background-color 0.2s; /* Add a transition effect for smooth color change */
+  border: none;
+}
+
+#homeButton:hover {
+  filter: saturate(2);
+  cursor: pointer;
+}
+
+#homeButton:active {
+  filter: brightness(0.9);
+  cursor: pointer;
+}
+
+.eddieButton {
+  background-color: lightblue;
+}
+
+.luciaButton {
+  background-color: lightskyblue;
+}
+
+.gmaButton {
+  background-color: lightgreen;
+}
+
+.sarahButton {
+  background-color: lightpink;
+}
+
+.linoButton {
+  background-color: lightseagreen;
+}
+
+.elisaButton {
+  background-color: lightsalmon;
+}

@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f6f6f6; /* Add a background color for the body */
+}
+
+.areaContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px; /* Add some padding to the container */
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.areaRow {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+#areaButton {
+  border-radius: 8px; /* Make the border more rounded */
+  border: none; /* Remove the border */
+  height: 100px;
+  width: 150px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth hover effect */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #333;
+}
+
+#areaButton .areaAllTasks {
+  height: 50px;
+}
+
+#areaButton:hover {
+  background-color: #e0e0e0; /* Change background color on hover */
+  transform: translateY(-5px); /* Add a slight upward lift effect */
+}
+
+#areaButton:active {
+  background-color: #cccccc; /* Change background color on click */
+  transform: translateY(2px); /* Reset the lift effect */
+}
+
+.areaButtonStatus {
+  font-size: 14px;
+  margin-top: 10px; /* Add some space between the button text and status */
+  color: #666; /* Use a slightly lighter color for status text */
+}

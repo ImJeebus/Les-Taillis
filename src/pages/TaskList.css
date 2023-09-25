@@ -1,0 +1,123 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+h1 {
+  margin-top: 10px;
+}
+
+.createTask {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.createTaskButton {
+  width: 175px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #007bff; /* Use a modern color */
+  color: #fff; /* White text for contrast */
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  border-radius: 25px; /* Use a larger border-radius for a smoother look */
+  padding: 12px 10px; /* Increase padding for more whitespace */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Use a more subtle shadow */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px; /* Adjust font size for better readability */
+  transition: background-color 0.3s ease, transform 0.1s ease,
+    box-shadow 0.2s ease; /* Smoother transitions */
+}
+
+.createTaskButton:hover {
+  background-color: #0056b3; /* Darker color on hover */
+  transform: scale(1.05); /* Slight scale increase for smooth hover effect */
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Slight shadow increase on hover */
+}
+
+.createTaskButton:active {
+  background-color: #0040a1; /* Even darker color on active state */
+  transform: scale(0.95); /* Slight scale decrease on click */
+  box-shadow: none; /* Remove shadow on click */
+}
+
+.taskListSection {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px 0 50px;
+  margin-top: 20px;
+}
+
+/* .taskBox {
+  display: flex;
+  background-color: lightyellow;
+  padding: 10px 20px;
+  border-radius: 10px;
+} */
+
+.taskList {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.taskDetails {
+  padding: 7px 30px;
+  border-radius: 5px;
+  border: solid;
+  border-color: lightgrey;
+  border-width: 0 1px 1px 0;
+  background-color: white;
+  box-shadow: 5px 5px 10px lightgrey;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 275px;
+  margin: 0;
+}
+
+.taskDetails:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.taskDetails:active {
+  background-color: rgb(213, 239, 248);
+}
+
+.taskCheckbox {
+  cursor: pointer;
+  transform: scale(1.5);
+}
+
+.taskCheckbox:active {
+  cursor: pointer;
+  transform: scale(2);
+}
+
+.removeTaskButton {
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 5px 5px;
+}
+
+.removeTaskButton:hover {
+  filter: brightness(1.2);
+  background-color: darkred;
+}
+
+.removeTaskButton:active {
+  filter: brightness(1.2);
+  background-color: rgb(255, 82, 82);
+  transform: scale(1.1);
+}
