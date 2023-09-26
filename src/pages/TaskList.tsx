@@ -14,8 +14,6 @@ import {
 } from 'firebase/firestore';
 import { useUser } from '../UserContext';
 
-import { v4 as uuid } from 'uuid';
-
 const TaskList = () => {
   const { selectedUser, users } = useUser();
   const selectedUserText = users.find(

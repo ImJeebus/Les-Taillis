@@ -4,7 +4,7 @@ import './UpdateTask.css';
 const UpdateTask = () => {
   return (
     <div className="updateTaskContainer">
-      Updates
+      <div className="updateTaskTitle">Updates</div>
       <input
         type="text"
         className="inputTaskUpdate"

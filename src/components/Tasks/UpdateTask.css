@@ -1,0 +1,21 @@
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.updateTaskContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.updateTaskTitle {
+  font-weight: bold;
+}
+
+.inputTaskUpdate {
+  border-radius: 5px;
+  border-width: 1px;
+  padding: 5px 50px 5px 50px;
+  text-align: center;
+}

@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Area from './pages/Area';
 import TaskList from './pages/TaskList';
 import NavBar from './components/NavBar';
+import EditTaskModal from './components/Tasks/EditTaskModal';
 
 const PageProperties = ({ component: Component }) => {
   const { selectedUser, users } = useUser();
@@ -29,11 +30,11 @@ const PageProperties = ({ component: Component }) => {
 };
 
 export const App = () => {
-  // const selectedItem = {
-  //   title: 'Sample Title',
-  //   description: 'Sample Description',
-  //   addedBy: 'Sample User',
-  // };
+  const selectedItem = {
+    title: 'Sample Title',
+    description: 'Sample Description',
+    addedBy: 'Sample User',
+  };
 
   return (
     <UserProvider>
@@ -50,14 +51,22 @@ export const App = () => {
             element={<PageProperties component={<TaskList />} />}
           />
         </Routes>
-
-        <div>
-          {/* <EditTaskModal isOpen={true} selectedItem={selectedItem} /> */}
-          {/* <AddTaskModal /> */}
-          {/* <TaskList areaButtonValue="mainHouse" /> */}
-          {/* {pages[activePage]} */}
-        </div>
       </Router>
     </UserProvider>
   );
 };
+
+// <div>
+{
+  /* <EditTaskModal isOpen={true} selectedItem={selectedItem} /> */
+}
+{
+  /* <AddTaskModal /> */
+}
+{
+  /* <TaskList areaButtonValue="mainHouse" /> */
+}
+{
+  /* {pages[activePage]} */
+}
+// </div>

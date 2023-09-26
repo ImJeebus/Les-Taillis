@@ -10,13 +10,16 @@ const EditTaskModal = ({
   selectedIndex,
 }) => {
   if (!isOpen) return null;
-console.log("editask index",selectedIndex)
+  console.log('editask index', selectedIndex);
   return (
     <div className="editTaskModalOverlay">
       <div className="editTaskModalContent">
-        <div>Task Title: {selectedItem.title}</div>
-        <div>Task Description: {selectedItem.description}</div>
-        <div>Added by: {selectedItem.addedBy}</div>
+        <div className="editTaskModalSummary">
+          <div className="editTaskModalTitle">{selectedItem.title}</div>
+          <div className="editTaskModalDescription">{selectedItem.description}</div>
+          <div className="editTaskModalAddedBy">Added by: {selectedItem.addedBy}</div>
+        </div>
+        <UpdateTask />
         <div className="editTaskModalButtonsContainer">
           <button id="editTaskModalButtons" className="editTaskModalCompleted">
             Completed
@@ -32,7 +35,6 @@ console.log("editask index",selectedIndex)
             Remove
           </button>
         </div>
-        <UpdateTask />
       </div>
       <button className="editTaskModalCloseButton" onClick={onClose}>
         Close
