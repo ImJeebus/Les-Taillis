@@ -52,6 +52,7 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
           collection(firestore, 'tasks', value, value, taskID, 'Updates'),
           {
             UpdateText: newUpdate,
+            UpdatedBy: selectedUserText,
           }
         );
         // Clear the input field
@@ -86,7 +87,7 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
         <ul className="updateListItems">
           {updates.map((update, listIndex) => (
             <li key={update.id}>
-              {selectedUserText}: {update.UpdateText}
+              {update.UpdatedBy}: {update.UpdateText}
               {listIndex < updates.length - 1 && <hr />}
             </li>
           ))}
