@@ -19,27 +19,11 @@ const TaskList = () => {
   const selectedUserText = users.find(
     (user) => user.value === selectedUser
   )?.text;
-  console.log('selectedUser', selectedUserText);
   const { value } = useParams();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const openAddModal = () => {
-    setIsAddModalOpen(true);
-  };
-  const closeAddModal = () => {
-    setIsAddModalOpen(false);
-  };
-
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const openEditModal = ({ item, index }) => {
-    setSelectedItem(item);
-    setSelectedIndex(index);
-    setIsEditModalOpen(true);
-  };
-  const closeEditModal = () => {
-    setIsEditModalOpen(false);
-  };
 
   const Titles = {
     mainHouse: 'Main House',
@@ -51,9 +35,15 @@ const TaskList = () => {
     allTasks: 'All Tasks',
   };
 
-  const [itemsDict, setItemsDict] = useState({});
   const [newItem, setNewItem] = useState('');
   const [newDescription, setNewDescription] = useState('');
+  const [taskList, setTaskList] = useState([]);
+
+  const openEditModal = ({ item, index }) => {
+    setSelectedItem(item);
+    setSelectedIndex(index);
+    setIsEditModalOpen(true);
+  };
 
   const fetchData = async () => {
     try {
@@ -61,18 +51,7 @@ const TaskList = () => {
         collection(firestore, 'tasks', value, value)
       );
       const data = querySnapshot.docs.map((doc) => doc.data());
-
-      const areaItems = data || [];
-      const updatedAreaItems = areaItems.map((item) => {
-        return {
-          ...item,
-        };
-      });
-      const updatedDict = {
-        ...itemsDict,
-        [value]: updatedAreaItems,
-      };
-      setItemsDict(updatedDict);
+      setTaskList(data);
     } catch (error) {
       console.log(error);
     }
@@ -84,7 +63,6 @@ const TaskList = () => {
 
   const addItem = async ({ title, description }) => {
     if (title.trim() !== '') {
-      // add to firestore
       try {
         await addDoc(collection(firestore, 'tasks', value, value), {
           title: title,
@@ -102,9 +80,7 @@ const TaskList = () => {
   };
 
   const removeItem = async (index) => {
-    const currentItems = itemsDict[value] || [];
-    const itemToRemove = currentItems[index];
-    console.log('curr index', currentItems[index]);
+    const itemToRemove = taskList[index];
     try {
       const querySnapshot = await getDocs(
         collection(firestore, 'tasks', value, value)
@@ -114,17 +90,10 @@ const TaskList = () => {
           doc.data().title === itemToRemove.title &&
           doc.data().description === itemToRemove.description
       );
-      console.log('matchdoc', matchingDocs);
       if (matchingDocs.length > 0) {
         const docToDelete = matchingDocs[0];
         await deleteDoc(
-          doc(
-            firestore,
-            docToDelete._key.path.segments[5],
-            docToDelete._key.path.segments[6],
-            docToDelete._key.path.segments[7],
-            docToDelete._key.path.segments[8]
-          )
+          doc(firestore, ...docToDelete._key.path.segments.slice(5))
         );
       }
       fetchData();
@@ -137,17 +106,18 @@ const TaskList = () => {
     <div className="taskContainer">
       <h1>{Titles[value]}</h1>
       <div className="createTask">
-        <button className="createTaskButton" onClick={openAddModal}>
-          {
-            <AiOutlinePlusCircle
-              style={{ fontSize: '32px', marginRight: '10px' }}
-            />
-          }
+        <button
+          className="createTaskButton"
+          onClick={() => setIsAddModalOpen(true)}
+        >
+          <AiOutlinePlusCircle
+            style={{ fontSize: '32px', marginRight: '10px' }}
+          />
           Add New Task
         </button>
         <AddTaskModal
           isOpen={isAddModalOpen}
-          onClose={closeAddModal}
+          onClose={() => setIsAddModalOpen(false)}
           areaButtonValue={value}
           addItem={addItem}
           newItem={newItem}
@@ -158,19 +128,12 @@ const TaskList = () => {
       </div>
       <div className="taskListContainer">
         <ul className="taskListSection">
-          {(itemsDict[value] || []).map((item, index) => (
+          {taskList.map((item, index) => (
             <li className="taskList" key={index}>
-              {/* <div className="taskBox"> */}
               <button
                 className="taskDetails"
                 onClick={() => openEditModal({ item, index })}
               >
-                {/* <input
-                  className="taskCheckbox"
-                  type="checkbox"
-                  checked={item.checked}
-                  // onChange={() => handleCheckboxChange(item)}
-                /> */}
                 <strong>{item.title}</strong> - {item.description}
               </button>
               <button
@@ -179,17 +142,15 @@ const TaskList = () => {
               >
                 Remove
               </button>
-              {/* </div> */}
             </li>
           ))}
         </ul>
         <EditTaskModal
           isOpen={isEditModalOpen}
-          onClose={closeEditModal}
+          onClose={() => setIsEditModalOpen(false)}
           removeItem={removeItem}
           selectedItem={selectedItem}
           selectedIndex={selectedIndex}
-          // selectedTaskID
         />
       </div>
     </div>
