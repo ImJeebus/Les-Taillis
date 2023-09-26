@@ -84,16 +84,19 @@ const TaskList = () => {
 
   const removeItem = async (index) => {
     const itemToRemove = taskList[index];
+
     try {
       const querySnapshot = await getDocs(
         collection(firestore, 'tasks', value, value)
       );
+
       const matchingDocs = querySnapshot.docs.filter(
         (doc) =>
           doc.data().title === itemToRemove.title &&
           doc.data().description === itemToRemove.description &&
-          doc.data().id === itemToRemove.id
+          doc.id === itemToRemove.id
       );
+
       if (matchingDocs.length > 0) {
         const docToDelete = matchingDocs[0];
         await deleteDoc(

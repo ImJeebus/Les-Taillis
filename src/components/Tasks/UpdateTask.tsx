@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './UpdateTask.css';
 import { firestore } from './../../firebase';
 import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
+import { useUser } from './../../UserContext';
 
 const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
   const [newUpdate, setNewUpdate] = useState('');
   const [updates, setUpdates] = useState([]);
+
+  const { selectedUser, users } = useUser();
+  const selectedUserText = users.find(
+    (user) => user.value === selectedUser
+  )?.text;
 
   const taskID = selectedItem.id;
 
@@ -77,9 +83,12 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
         </button>
       </div>
       <div className="updateList">
-        <ul>
-          {updates.map((update) => (
-            <li key={update.id}>{update.UpdateText}</li>
+        <ul className="updateListItems">
+          {updates.map((update, listIndex) => (
+            <li key={update.id}>
+              {selectedUserText}: {update.UpdateText}
+              {listIndex < updates.length - 1 && <hr />}
+            </li>
           ))}
         </ul>
       </div>

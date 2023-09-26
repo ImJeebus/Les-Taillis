@@ -45,3 +45,38 @@
   cursor: pointer;
   transform: scale(0.8);
 }
+
+.updateList {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  overflow-y: scroll;
+  width: 100%;
+  height: 200px;
+  margin-top: 10px;
+}
+
+.updateListItems {
+  list-style: none;
+  padding: 0;
+}
+
+.updateListItems li {
+  margin-bottom: 10px; /* Adjust the value to control the vertical gap */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+}
+
+.updateListItems li hr {
+  /* position: static; */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-top: 10px; /* Remove default margin */
+  border: none;
+  border-top: 1px solid #ccc; /* Adjust the border style as needed */
+  width: 250px;
+}
