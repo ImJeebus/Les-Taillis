@@ -50,7 +50,10 @@ const TaskList = () => {
       const querySnapshot = await getDocs(
         collection(firestore, 'tasks', value, value)
       );
-      const data = querySnapshot.docs.map((doc) => doc.data());
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setTaskList(data);
     } catch (error) {
       console.log(error);
@@ -88,7 +91,8 @@ const TaskList = () => {
       const matchingDocs = querySnapshot.docs.filter(
         (doc) =>
           doc.data().title === itemToRemove.title &&
-          doc.data().description === itemToRemove.description
+          doc.data().description === itemToRemove.description &&
+          doc.data().id === itemToRemove.id
       );
       if (matchingDocs.length > 0) {
         const docToDelete = matchingDocs[0];
@@ -151,6 +155,7 @@ const TaskList = () => {
           removeItem={removeItem}
           selectedItem={selectedItem}
           selectedIndex={selectedIndex}
+          value={value}
         />
       </div>
     </div>

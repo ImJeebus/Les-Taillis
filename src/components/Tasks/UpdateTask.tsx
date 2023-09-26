@@ -1,14 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import './UpdateTask.css';
+import { firestore } from './../../firebase';
+import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
 
-const UpdateTask = () => {
-  const [newUpdate, setNewUpdate] = useState();
+const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
+  const [newUpdate, setNewUpdate] = useState('');
+  const [updates, setUpdates] = useState([]);
 
-  const handleUpdateTask = () => {
-    if (newUpdate.trim() !== '') {
-      addUpdate({ update: newUpdate });
-      // setNewItem('');
-      // setNewDescription('');
+  const taskID = selectedItem.id;
+
+  const fetchUpdates = async () => {
+    try {
+      const updatesQuery = query(
+        collection(firestore, 'tasks', value, value, taskID, 'Updates')
+      );
+      console.log('update query', updatesQuery);
+
+      const updatesSnapshot = await getDocs(updatesQuery);
+      console.log('update snapshot', updatesSnapshot);
+
+      const updateData = updatesSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      console.log('update data', updateData);
+
+      setUpdates(updateData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (taskID) {
+      fetchUpdates();
+    }
+  }, [taskID]);
+
+  const handleUpdateTask = async () => {
+    if (newUpdate.trim() !== '' && taskID) {
+      console.log('newUpdate trim', newUpdate.trim());
+      try {
+        // Add the update to Firestore
+        await addDoc(
+          collection(firestore, 'tasks', value, value, taskID, 'Updates'),
+          {
+            UpdateText: newUpdate,
+          }
+        );
+        // Clear the input field
+        setNewUpdate('');
+        // Fetch updates again to update the list
+        fetchUpdates();
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -21,7 +67,7 @@ const UpdateTask = () => {
           className="inputTaskUpdate"
           placeholder="Add an update..."
           value={newUpdate}
-          // onChange={(e) => setNewUpdate(e.target.value)}
+          onChange={(e) => setNewUpdate(e.target.value)}
         />
         <button
           className="updateTaskAddUpdateButton"
@@ -29,6 +75,13 @@ const UpdateTask = () => {
         >
           Add
         </button>
+      </div>
+      <div className="updateList">
+        <ul>
+          {updates.map((update) => (
+            <li key={update.id}>{update.UpdateText}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );
