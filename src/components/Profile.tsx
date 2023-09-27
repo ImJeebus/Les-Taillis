@@ -11,16 +11,19 @@ const Profile = () => {
     (user) => user.value === selectedUser
   )?.text;
 
+  const clickProfileButton = () => {};
+
   return (
     <div className="profileContainer">
-      <div
+      <button
         className="profileBubble"
         style={{
           backgroundColor: selectedUserColor,
         }}
+        onClick={clickProfileButton()}
       >
         {selectedUser && <span>{selectedUserText}</span>}
-      </div>
+      </button>
     </div>
   );
 };

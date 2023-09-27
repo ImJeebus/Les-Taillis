@@ -1,13 +1,25 @@
 .profileContainer {
-  background-color: lightgrey;
 }
 
 .profileBubble {
   border-radius: 50px;
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+}
+
+.profileBubble:hover {
+  filter: saturate(2);
+  cursor: pointer;
+  transform: scale(1.05); /* Scale up on hover */
+}
+
+.profileBubble:active {
+  filter: brightness(0.9);
+  cursor: pointer;
+  transform: scale(0.9); /* Scale down on click */
 }

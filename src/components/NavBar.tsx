@@ -9,7 +9,7 @@ const NavBar = () => {
 
   return (
     <div className="navBarContainer">
-      {location.pathname !== '/' && (
+      {location.pathname !== '/' && location.pathname !== '/area' && (
         <Link to="/" className="navBarHome">
           <BiHomeAlt />
         </Link>
@@ -19,11 +19,11 @@ const NavBar = () => {
           <BiBorderNone />
         </Link>
       )}
-      {location.pathname !== '/' && (
+      {/* {location.pathname !== '/' && (
         <div className="userProfile">
           <Profile />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

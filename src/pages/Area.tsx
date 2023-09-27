@@ -3,6 +3,7 @@ import './Area.css';
 import { Link, redirect } from 'react-router-dom';
 import { useUser } from '../UserContext';
 import NavBar from '../components/NavBar';
+import Profile from '../components/Profile';
 
 const Area = () => {
   const buttons = [
@@ -16,9 +17,10 @@ const Area = () => {
   ];
 
   return (
-    <div>
-      <NavBar />
-      <div className="areaContainer">
+    <div className="areaContainer">
+      {/* <NavBar /> */}
+      <Profile />
+      <div className="areaGridContainer">
         <div className="areaGrid">
           {buttons.map(({ value, text }) => (
             <Link
