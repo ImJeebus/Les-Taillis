@@ -13,6 +13,7 @@ import {
   getDocs,
 } from 'firebase/firestore';
 import { useUser } from '../UserContext';
+import NavBar from '../components/NavBar';
 
 const TaskList = () => {
   const { selectedUser, users } = useUser();
@@ -110,56 +111,60 @@ const TaskList = () => {
   };
 
   return (
-    <div className="taskContainer">
-      <h1>{Titles[value]}</h1>
-      <div className="createTask">
-        <button
-          className="createTaskButton"
-          onClick={() => setIsAddModalOpen(true)}
-        >
-          <AiOutlinePlusCircle
-            style={{ fontSize: '32px', marginRight: '10px' }}
+    <div>
+      {' '}
+      <NavBar />
+      <div className="taskContainer">
+        <h1>{Titles[value]}</h1>
+        <div className="createTask">
+          <button
+            className="createTaskButton"
+            onClick={() => setIsAddModalOpen(true)}
+          >
+            <AiOutlinePlusCircle
+              style={{ fontSize: '32px', marginRight: '10px' }}
+            />
+            Add New Task
+          </button>
+          <AddTaskModal
+            isOpen={isAddModalOpen}
+            onClose={() => setIsAddModalOpen(false)}
+            areaButtonValue={value}
+            addItem={addItem}
+            newItem={newItem}
+            setNewItem={setNewItem}
+            newDescription={newDescription}
+            setNewDescription={setNewDescription}
           />
-          Add New Task
-        </button>
-        <AddTaskModal
-          isOpen={isAddModalOpen}
-          onClose={() => setIsAddModalOpen(false)}
-          areaButtonValue={value}
-          addItem={addItem}
-          newItem={newItem}
-          setNewItem={setNewItem}
-          newDescription={newDescription}
-          setNewDescription={setNewDescription}
-        />
-      </div>
-      <div className="taskListContainer">
-        <ul className="taskListSection">
-          {taskList.map((item, index) => (
-            <li className="taskList" key={index}>
-              <button
-                className="taskDetails"
-                onClick={() => openEditModal({ item, index })}
-              >
-                <strong>{item.title}</strong> - {item.description}
-              </button>
-              <button
-                className="removeTaskButton"
-                onClick={() => removeItem(index)}
-              >
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
-        <EditTaskModal
-          isOpen={isEditModalOpen}
-          onClose={() => setIsEditModalOpen(false)}
-          removeItem={removeItem}
-          selectedItem={selectedItem}
-          selectedIndex={selectedIndex}
-          value={value}
-        />
+        </div>
+        <div className="taskListContainer">
+          <ul className="taskListSection">
+            {taskList.map((item, index) => (
+              <li className="taskList" key={index}>
+                <button
+                  className="taskDetails"
+                  onClick={() => openEditModal({ item, index })}
+                >
+                  <strong>{item.title}</strong> - {item.description}
+                </button>
+                <button
+                  className="removeTaskButton"
+                  onClick={() => removeItem(index)}
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+          <EditTaskModal
+            isOpen={isEditModalOpen}
+            onClose={() => setIsEditModalOpen(false)}
+            removeItem={removeItem}
+            selectedItem={selectedItem}
+            selectedIndex={selectedIndex}
+            value={value}
+          />
+        </div>
       </div>
     </div>
   );

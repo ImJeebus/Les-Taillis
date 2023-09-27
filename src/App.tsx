@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { UserProvider } from './UserContext';
 import { useUser } from './UserContext';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link,
+  redirect,
+  Navigate,
+  useNavigate,
+} from 'react-router-dom';
 
 import 'tailwindcss/tailwind.css';
 
@@ -16,6 +24,7 @@ const PageProperties = ({ component: Component }) => {
   const { selectedUser, users } = useUser();
   const user = users.find((u) => u.value === selectedUser);
   const userColor = user ? user.color : 'rgba(80, 187, 251, 1)'; // Default color
+  console.log('selected user is', selectedUser);
 
   return (
     <div
@@ -30,29 +39,30 @@ const PageProperties = ({ component: Component }) => {
 };
 
 export const App = () => {
+  const { selectedUser } = useUser();
+  const navigate = useNavigate();
+
   const selectedItem = {
     title: 'Sample Title',
     description: 'Sample Description',
     addedBy: 'Sample User',
   };
 
+  useEffect(() => {
+    if (!selectedUser) {
+      navigate('/');
+    }
+  }, [selectedUser, navigate]);
+
   return (
-    <UserProvider>
-      <Router>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/area"
-            element={<PageProperties component={<Area />} />}
-          />
-          <Route
-            path="/tasklist/:value"
-            element={<PageProperties component={<TaskList />} />}
-          />
-        </Routes>
-      </Router>
-    </UserProvider>
+    <Routes>
+      <Route exact path="/" element={<Home />} />
+      <Route path="/area" element={<PageProperties component={<Area />} />} />
+      <Route
+        path="/tasklist/:value"
+        element={<PageProperties component={<TaskList />} />}
+      />
+    </Routes>
   );
 };
 

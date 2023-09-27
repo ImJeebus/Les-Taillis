@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './Area.css';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
+import { useUser } from '../UserContext';
+import NavBar from '../components/NavBar';
 
 const Area = () => {
   const buttons = [
@@ -15,6 +17,7 @@ const Area = () => {
 
   return (
     <div>
+      <NavBar />
       <div className="areaContainer">
         <div className="areaGrid">
           {buttons.map(({ value, text }) => (
