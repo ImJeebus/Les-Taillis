@@ -1,4 +1,3 @@
-// Home.tsx
 import React from 'react';
 import './Home.css';
 import { useUser } from '../UserContext';

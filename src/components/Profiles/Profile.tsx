@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Profile.css';
 import { useUser } from '../UserContext';
+import EditProfileModal from './EditProfileModal';
 
 const Profile = () => {
   const { selectedUser, users } = useUser();
@@ -11,7 +12,7 @@ const Profile = () => {
     (user) => user.value === selectedUser
   )?.text;
 
-  const clickProfileButton = () => {};
+  const [isProfileModalOpen, setIsProfileMOdalOpen] = useState(false);
 
   return (
     <div className="profileContainer">
@@ -20,10 +21,11 @@ const Profile = () => {
         style={{
           backgroundColor: selectedUserColor,
         }}
-        onClick={clickProfileButton()}
+        onClick={() => setIsProfileMOdalOpen(true)}
       >
         {selectedUser && <span>{selectedUserText}</span>}
       </button>
+      <EditProfileModal />
     </div>
   );
 };

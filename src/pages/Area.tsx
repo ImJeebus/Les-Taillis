@@ -3,7 +3,7 @@ import './Area.css';
 import { Link, redirect } from 'react-router-dom';
 import { useUser } from '../UserContext';
 import NavBar from '../components/NavBar';
-import Profile from '../components/Profile';
+import Profile from '../components/Profiles/Profile';
 
 const Area = () => {
   const buttons = [
