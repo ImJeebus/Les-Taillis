@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Profile.css';
-import { useUser } from '../UserContext';
+import { useUser } from '../../UserContext';
 import EditProfileModal from './EditProfileModal';
 
 const Profile = () => {
@@ -12,20 +12,26 @@ const Profile = () => {
     (user) => user.value === selectedUser
   )?.text;
 
-  const [isProfileModalOpen, setIsProfileMOdalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  console.log('isprofopen', isProfileModalOpen);
 
   return (
     <div className="profileContainer">
       <button
-        className="profileBubble"
+        className={`profileBubble ${
+          isProfileModalOpen ? 'expandBubbleAnimation' : 'profileBubble'
+        }`}
         style={{
           backgroundColor: selectedUserColor,
         }}
-        onClick={() => setIsProfileMOdalOpen(true)}
+        onClick={() => setIsProfileModalOpen(true)}
       >
         {selectedUser && <span>{selectedUserText}</span>}
       </button>
-      <EditProfileModal />
+      <EditProfileModal
+        isOpen={isProfileModalOpen}
+        onClose={() => setIsProfileModalOpen(false)}
+      />
     </div>
   );
 };

@@ -21,5 +21,21 @@
 .profileBubble:active {
   filter: brightness(0.9);
   cursor: pointer;
-  transform: scale(0.9); /* Scale down on click */
+  transform: scale(0.8); /* Scale down on click */
+}
+
+.expandBubbleAnimation {
+  animation: expandBubble 0.5s ease-in-out 0.0s forwards;
+  justify-content: baseline
+}
+
+@keyframes expandBubble {
+  0% {
+    width: 100px;
+    height: 100px;
+  }
+  100% {
+    width: 100vw;
+    height: 200px;
+  }
 }
