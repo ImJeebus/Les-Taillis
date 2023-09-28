@@ -46,14 +46,14 @@ const Profile = () => {
             </div>
             <div className="profileButtons">
               <button
-                className="profileLogout"
+                className="profileLogoutButton"
                 onClick={() => {
                   navigate('/');
                 }}
               >
                 Logout
               </button>
-              <button className="profileClose" onClick={handleClosedClick}>
+              <button className="profileCloseButton" onClick={handleClosedClick}>
                 Close
               </button>
             </div>
