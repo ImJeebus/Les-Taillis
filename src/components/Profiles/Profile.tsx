@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Profile.css';
 import { useUser } from '../../UserContext';
-import EditProfileModal from './EditProfileModal';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const { selectedUser, users } = useUser();
@@ -12,26 +12,58 @@ const Profile = () => {
     (user) => user.value === selectedUser
   )?.text;
 
-  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-  console.log('isprofopen', isProfileModalOpen);
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+  const handleClosedClick = () => {
+    setExpanded(false);
+  };
+
+  const profileNameClassName = expanded
+    ? 'profileName profileNameExpanded'
+    : 'profileName';
+
+  const navigate = useNavigate();
 
   return (
     <div className="profileContainer">
-      <button
+      <div
         className={`profileBubble ${
-          isProfileModalOpen ? 'expandBubbleAnimation' : 'profileBubble'
+          expanded ? 'profileBubbleExpanded' : 'profileBubble'
         }`}
         style={{
           backgroundColor: selectedUserColor,
         }}
-        onClick={() => setIsProfileModalOpen(true)}
+        onClick={expanded ? null : handleExpandClick}
       >
-        {selectedUser && <span>{selectedUserText}</span>}
-      </button>
-      <EditProfileModal
-        isOpen={isProfileModalOpen}
-        onClose={() => setIsProfileModalOpen(false)}
-      />
+        {expanded ? (
+          <>
+            <div className={profileNameClassName}>
+              {selectedUser && <span>{selectedUserText}</span>}
+            </div>
+            <div className="profileButtons">
+              <button
+                className="profileLogoutButton"
+                onClick={() => {
+                  navigate('/');
+                }}
+              >
+                Logout
+              </button>
+              <button className="profileCloseButton" onClick={handleClosedClick}>
+                Close
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className={profileNameClassName}>
+            {selectedUser && <span>{selectedUserText}</span>}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

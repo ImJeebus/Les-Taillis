@@ -1,41 +1,103 @@
-.profileContainer {
-}
-
 .profileBubble {
   border-radius: 50px;
   width: 100px;
   height: 100px;
   font-size: 16px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border: none;
+  gap: 20px;
+  animation: shrinkBubble 0.5s ease-in-out 0s forwards;
+  /* position: relative; */
+}
+
+@keyframes shrinkBubble {
+  0% {
+    width: 100vw;
+    height: 200px;
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 .profileBubble:hover {
   filter: saturate(2);
   cursor: pointer;
-  transform: scale(1.05); /* Scale up on hover */
+  transform: scale(1.05);
 }
 
 .profileBubble:active {
   filter: brightness(0.9);
   cursor: pointer;
-  transform: scale(0.8); /* Scale down on click */
+  transform: scale(0.9);
 }
 
-.expandBubbleAnimation {
-  animation: expandBubble 0.5s ease-in-out 0.0s forwards;
-  justify-content: baseline
+.profileBubbleExpanded {
+  animation: expandBubble 0.5s ease-in-out 0s forwards;
+  /* justify-content: baseline; */
+  /* border-radius: 0px; */
 }
 
 @keyframes expandBubble {
   0% {
     width: 100px;
     height: 100px;
+    /* border-radius: 5px; */
   }
   100% {
     width: 100vw;
     height: 200px;
+    /* border-radius: 0px; */
+    top: 40px;
   }
+}
+
+.profileBubbleExpanded:hover {
+  cursor: auto;
+  filter: none;
+  transform: none;
+}
+
+.profileBubbleExpanded:active {
+  cursor: auto;
+  filter: none;
+  transform: none;
+}
+
+.profileName {
+  font-size: 16px;
+  transition: font-size 0.6s ease, transform 0.6s ease;
+}
+
+.profileName.profileNameExpanded {
+  font-size: 32px;
+  /* transform: translateY(-40px); */
+}
+
+.profileButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.profileLogoutButton,
+.profileCloseButton {
+  padding: 5px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profileLogoutButton:hover,
+.profileCloseButton:hover {
+  filter: brightness(1.1);
+}
+
+.profileLogoutButton:active,
+.profileCloseButton:active {
+  filter: brightness(0.9);
 }
