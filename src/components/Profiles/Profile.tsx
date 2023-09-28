@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Profile.css';
 import { useUser } from '../../UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const { selectedUser, users } = useUser();
@@ -25,6 +26,8 @@ const Profile = () => {
     ? 'profileName profileNameExpanded'
     : 'profileName';
 
+  const navigate = useNavigate();
+
   return (
     <div className="profileContainer">
       <div
@@ -42,7 +45,14 @@ const Profile = () => {
               {selectedUser && <span>{selectedUserText}</span>}
             </div>
             <div className="profileButtons">
-              <button className="profileLogout">Logout</button>
+              <button
+                className="profileLogout"
+                onClick={() => {
+                  navigate('/');
+                }}
+              >
+                Logout
+              </button>
               <button className="profileClose" onClick={handleClosedClick}>
                 Close
               </button>
