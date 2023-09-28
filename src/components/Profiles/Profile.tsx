@@ -12,31 +12,27 @@ const Profile = () => {
   )?.text;
 
   const [expanded, setExpanded] = useState(false);
-  const [closed, setClosed] = useState(false);
 
   const handleExpandClick = () => {
-    setExpanded(true);
-    setClosed(false);
+    setExpanded(!expanded);
   };
+
   const handleClosedClick = () => {
-    setClosed(true);
     setExpanded(false);
   };
-  console.log('expanded is', expanded);
-  console.log('closed is', closed);
 
   return (
     <div className="profileContainer">
       <div
         className={`profileBubble ${
-          expanded && !closed ? 'profileBubbleExpanded' : 'profileBubble'
+          expanded ? 'profileBubbleExpanded' : 'profileBubble'
         }`}
         style={{
           backgroundColor: selectedUserColor,
         }}
         onClick={handleExpandClick}
       >
-        {expanded && !closed ? (
+        {expanded ? (
           <>
             <div>{selectedUser && <span>{selectedUserText}</span>}</div>
             <div className="profileButtons">
