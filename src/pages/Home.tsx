@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Home.css';
 import { useUser } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,22 +7,38 @@ const Home = () => {
   const { setSelectedUser, users } = useUser();
   const [clickedUser, setClickedUser] = useState(null);
   const navigate = useNavigate();
-  const [buttonPosition, setButtonPosition] = useState({ top: 0, left: 0 }); // Track button position
+  const [buttonPosition, setButtonPosition] = useState({}); // Track button position
+
+  // Use useRef to store initial button positions
+  const buttonPositionsRef = useRef({});
+
+  // Calculate and store initial button positions when component mounts
+  useEffect(() => {
+    users.forEach((user) => {
+      const button = document.querySelector(`.${user.value}Button`);
+      if (button) {
+        const buttonRect = button.getBoundingClientRect();
+        console.log(user, 'button rect', buttonRect);
+        buttonPositionsRef.current[user.value] = {
+          top: buttonRect.top - 5,
+          left: buttonRect.left - 5,
+        };
+      }
+    });
+  }, [users]);
 
   const handleUserClick = (user) => {
     setSelectedUser(user.value);
     setClickedUser(user.value);
 
-    // Get the button's position before moving it
-    const button = document.querySelector(`.${user.value}Button`);
-    const buttonRect = button.getBoundingClientRect();
-
     // Calculate the new position (center of the screen)
-    const centerX = window.innerWidth / 2 - buttonRect.width / 2;
-    const centerY = window.innerHeight / 2 - buttonRect.height / 2;
+    const initialPosition = buttonPositionsRef.current[user.value] || {
+      top: window.innerHeight / 2 - 50, // Default top position
+      left: window.innerWidth / 2 - 50, // Default left position
+    };
 
     // Update the button's position
-    setButtonPosition({ top: centerY, left: centerX });
+    setButtonPosition(initialPosition);
 
     setTimeout(() => {
       navigate('/area');
