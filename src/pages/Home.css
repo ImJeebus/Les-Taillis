@@ -3,15 +3,6 @@ body {
   padding: 0;
 }
 
-.hidden {
-  display: none;
-}
-
-.centered {
-  position: absolute;
-  transition: top 1.5s, left 1.5s; /* Apply transitions */
-}
-
 .homeContainer {
   display: flex;
   flex-direction: column;
@@ -70,4 +61,13 @@ h1 {
   filter: brightness(0.9);
   cursor: pointer;
   transform: scale(0.9);
+}
+
+.hidden {
+  display: none;
+}
+
+.centered {
+  position: absolute;
+  transition: transform 0.5s ease, top 1.5s ease-in-out, left 1.5s ease-in-out; /* Apply transitions */
 }
