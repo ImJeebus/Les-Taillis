@@ -11,23 +11,45 @@ const Profile = () => {
     (user) => user.value === selectedUser
   )?.text;
 
-  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-  console.log('isprofopen', isProfileModalOpen);
+  const [expanded, setExpanded] = useState(false);
+  const [closed, setClosed] = useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(true);
+    setClosed(false);
+  };
+  const handleClosedClick = () => {
+    setClosed(true);
+    setExpanded(false);
+  };
+  console.log('expanded is', expanded);
+  console.log('closed is', closed);
 
   return (
     <div className="profileContainer">
-      <button
+      <div
         className={`profileBubble ${
-          isProfileModalOpen ? 'expandBubbleAnimation' : 'profileBubble'
+          expanded && !closed ? 'profileBubbleExpanded' : 'profileBubble'
         }`}
         style={{
           backgroundColor: selectedUserColor,
         }}
-        onClick={() => setIsProfileModalOpen(true)}
+        onClick={handleExpandClick}
       >
-        {selectedUser && <span>{selectedUserText}</span>}
-      </button>
-      <button className="editProfileModalClose">Close</button>
+        {expanded && !closed ? (
+          <>
+            <div>{selectedUser && <span>{selectedUserText}</span>}</div>
+            <div className="profileButtons">
+              <button className="profileLogout">Logout</button>
+              <button className="profileClose" onClick={handleClosedClick}>
+                Close
+              </button>
+            </div>
+          </>
+        ) : (
+          <div>{selectedUser && <span>{selectedUserText}</span>}</div>
+        )}
+      </div>
     </div>
   );
 };
