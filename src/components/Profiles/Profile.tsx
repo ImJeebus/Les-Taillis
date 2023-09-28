@@ -34,7 +34,7 @@ const Profile = () => {
         style={{
           backgroundColor: selectedUserColor,
         }}
-        onClick={handleExpandClick}
+        onClick={expanded ? null : handleExpandClick}
       >
         {expanded ? (
           <>

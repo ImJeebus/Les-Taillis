@@ -9,6 +9,18 @@
   justify-content: center;
   border: none;
   gap: 20px;
+  animation: shrinkBubble 0.5s ease-in-out 0s forwards;
+}
+
+@keyframes shrinkBubble {
+  0% {
+    width: 100vw;
+    height: 200px;
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 .profileBubble:hover {
