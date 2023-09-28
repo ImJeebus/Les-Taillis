@@ -14,13 +14,13 @@
 .profileBubble:hover {
   filter: saturate(2);
   cursor: pointer;
-  transform: scale(1.05); /* Scale up on hover */
+  transform: scale(1.05);
 }
 
 .profileBubble:active {
   filter: brightness(0.9);
   cursor: pointer;
-  transform: scale(0.8); /* Scale down on click */
+  transform: scale(0.9);
 }
 
 .profileBubbleExpanded {
@@ -52,7 +52,13 @@
 }
 
 .profileName {
-  font-size: 24px;
+  font-size: 16px;
+  transition: font-size 1s ease, transform 0.8s ease;
+}
+
+.profileName.profileNameExpanded {
+  font-size: 32px;
+  transform: translateY(-40px);
 }
 
 .profileButtons {

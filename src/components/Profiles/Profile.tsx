@@ -21,6 +21,10 @@ const Profile = () => {
     setExpanded(false);
   };
 
+  const profileNameClassName = expanded
+    ? 'profileName profileNameExpanded'
+    : 'profileName';
+
   return (
     <div className="profileContainer">
       <div
@@ -34,7 +38,7 @@ const Profile = () => {
       >
         {expanded ? (
           <>
-            <div className="profileName">
+            <div className={profileNameClassName}>
               {selectedUser && <span>{selectedUserText}</span>}
             </div>
             <div className="profileButtons">
@@ -45,7 +49,7 @@ const Profile = () => {
             </div>
           </>
         ) : (
-          <div className="profileName">
+          <div className={profileNameClassName}>
             {selectedUser && <span>{selectedUserText}</span>}
           </div>
         )}
