@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Profile.css';
 import { useUser } from '../../UserContext';
-import EditProfileModal from './EditProfileModal';
 
 const Profile = () => {
   const { selectedUser, users } = useUser();
@@ -28,10 +27,7 @@ const Profile = () => {
       >
         {selectedUser && <span>{selectedUserText}</span>}
       </button>
-      <EditProfileModal
-        isOpen={isProfileModalOpen}
-        onClose={() => setIsProfileModalOpen(false)}
-      />
+      <button className="editProfileModalClose">Close</button>
     </div>
   );
 };
