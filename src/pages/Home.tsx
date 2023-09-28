@@ -6,46 +6,52 @@ import { Link, useNavigate } from 'react-router-dom';
 const Home = () => {
   const { setSelectedUser, users } = useUser();
   const [clickedUser, setClickedUser] = useState(null);
+  const [buttonPositions, setButtonPositions] = useState({}); // Track button positions
   const navigate = useNavigate();
-  const [buttonPosition, setButtonPosition] = useState({}); // Track button position
 
-  // Use useRef to store initial button positions
-  const buttonPositionsRef = useRef({});
-
-  // Calculate and store initial button positions when component mounts
-  useEffect(() => {
+  // Function to calculate initial button positions
+  const calculateInitialButtonPositions = () => {
+    const positions = {};
     users.forEach((user) => {
       const button = document.querySelector(`.${user.value}Button`);
       if (button) {
         const buttonRect = button.getBoundingClientRect();
-        console.log(user, 'button rect', buttonRect);
-        buttonPositionsRef.current[user.value] = {
-          top: buttonRect.top - 5,
-          left: buttonRect.left - 5,
-        };
+        positions[user.value] = { top: buttonRect.top, left: buttonRect.left };
       }
     });
+    return positions;
+  };
+
+  // Set the initial button positions when the component mounts
+  useEffect(() => {
+    const initialPositions = calculateInitialButtonPositions();
+    setButtonPositions(initialPositions);
   }, [users]);
 
   const handleUserClick = (user) => {
     setSelectedUser(user.value);
     setClickedUser(user.value);
 
-    // Calculate the new position (center of the screen)
-    const initialPosition = buttonPositionsRef.current[user.value] || {
-      top: window.innerHeight / 2 - 50, // Default top position
-      left: window.innerWidth / 2 - 50, // Default left position
-    };
+    // get position of button
+    const initialButton = document.querySelector(`.${user.value}Button`);
+    const buttonRect = initialButton.getBoundingClientRect();
+
+    // Calculate the end position (destination: top center of screen)
+    const centerX = window.innerWidth / 2 - buttonRect.width / 2 - 2.5;
+    const centerY = 15;
 
     // Update the button's position
-    setButtonPosition(initialPosition);
+    setButtonPositions({
+      ...buttonPositions,
+      [user.value]: { top: centerY, left: centerX },
+    });
 
+    // Navigate after a delay
     setTimeout(() => {
       navigate('/area');
-    }, 2000);
+    }, 1500);
   };
 
-  console.log('clicked user', clickedUser);
   return (
     <div className="homeContainer">
       {clickedUser ? null : <h1>Les Taillis</h1>}
@@ -54,16 +60,18 @@ const Home = () => {
           {users.map((user) => (
             <Link
               key={user.value}
-              // to={`/area`}
               className={`homeButton ${user.value}Button ${
                 !clickedUser
                   ? ''
                   : clickedUser === user.value
-                  ? 'centered'
+                  ? 'centered' // Apply a class for centered position
                   : `hidden`
               }`}
               onClick={() => handleUserClick(user)}
-              style={{ backgroundColor: user.color, ...buttonPosition }}
+              style={{
+                backgroundColor: user.color,
+                ...buttonPositions[user.value], // Apply the dynamic button position
+              }}
             >
               {user.text}
             </Link>

@@ -3,15 +3,6 @@ body {
   padding: 0;
 }
 
-.hidden {
-  display: none;
-}
-
-.centered {
-  position: absolute;
-  transition: transform 0.5s, top 0.5s, left 0.5s; /* Apply transitions */
-}
-
 .homeContainer {
   display: flex;
   flex-direction: column;
@@ -54,7 +45,7 @@ h1 {
   text-align: center;
   margin: 5px;
   border-radius: 50%;
-  transition: background-color 0.2s transform 0.2s;
+  transition: background-color 0.2s transform 0.2;
   border: none;
   text-decoration: none;
   line-height: 100px;
@@ -70,4 +61,13 @@ h1 {
   filter: brightness(0.9);
   cursor: pointer;
   transform: scale(0.9);
+}
+
+.hidden {
+  display: none;
+}
+
+.centered {
+  position: absolute;
+  transition: transform 0.5s ease, top 1.5s ease-in-out, left 1.5s ease-in-out; /* Apply transitions */
 }
