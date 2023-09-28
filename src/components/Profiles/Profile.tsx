@@ -34,7 +34,9 @@ const Profile = () => {
       >
         {expanded ? (
           <>
-            <div>{selectedUser && <span>{selectedUserText}</span>}</div>
+            <div className="profileName">
+              {selectedUser && <span>{selectedUserText}</span>}
+            </div>
             <div className="profileButtons">
               <button className="profileLogout">Logout</button>
               <button className="profileClose" onClick={handleClosedClick}>
@@ -43,7 +45,9 @@ const Profile = () => {
             </div>
           </>
         ) : (
-          <div>{selectedUser && <span>{selectedUserText}</span>}</div>
+          <div className="profileName">
+            {selectedUser && <span>{selectedUserText}</span>}
+          </div>
         )}
       </div>
     </div>
