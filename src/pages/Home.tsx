@@ -20,7 +20,7 @@ const Home = () => {
         const buttonRect = button.getBoundingClientRect();
         console.log(user, 'button rect', buttonRect);
         buttonPositionsRef.current[user.value] = {
-          top: buttonRect.top - 5,
+          top: buttonRect.top - 100,
           left: buttonRect.left - 5,
         };
       }
@@ -32,13 +32,13 @@ const Home = () => {
     setClickedUser(user.value);
 
     // Calculate the new position (center of the screen)
-    const initialPosition = buttonPositionsRef.current[user.value] || {
-      top: window.innerHeight / 2 - 50, // Default top position
-      left: window.innerWidth / 2 - 50, // Default left position
+    const finalPosition = {
+      top: window.innerHeight / 2 - 50, // Centered vertically
+      left: window.innerWidth / 2 - 50, // Centered horizontally
     };
 
-    // Update the button's position
-    setButtonPosition(initialPosition);
+    // Set the button's final position
+    setButtonPosition(finalPosition);
 
     setTimeout(() => {
       navigate('/area');
