@@ -20,16 +20,13 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
       const updatesQuery = query(
         collection(firestore, 'tasks', value, value, taskID, 'Updates')
       );
-      console.log('update query', updatesQuery);
 
       const updatesSnapshot = await getDocs(updatesQuery);
-      console.log('update snapshot', updatesSnapshot);
 
       const updateData = updatesSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      console.log('update data', updateData);
 
       setUpdates(updateData);
     } catch (error) {
@@ -45,7 +42,6 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
 
   const handleUpdateTask = async () => {
     if (newUpdate.trim() !== '' && taskID) {
-      console.log('newUpdate trim', newUpdate.trim());
       try {
         await addDoc(
           collection(firestore, 'tasks', value, value, taskID, 'Updates'),
