@@ -28,7 +28,7 @@ const TaskList = () => {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
- const title = buttons.find((button) => button.value === value)?.text;
+  const title = buttons.find((button) => button.value === value)?.text;
 
   const [taskList, setTaskList] = useState([]);
 
@@ -84,56 +84,54 @@ const TaskList = () => {
   };
 
   return (
-    <div>
+    <div className="taskContainer">
       <NavBar />
       <Profile />
-      <div className="taskContainer">
-        {/* <h1>{Titles[value]}</h1> */}
-        <h1>{title}</h1>
-        <div className="createTask">
-          <button
-            className="createTaskButton"
-            onClick={() => setIsAddModalOpen(true)}
-          >
-            <AiOutlinePlusCircle
-              style={{ fontSize: '32px', marginRight: '10px' }}
-            />
-            Add New Task
-          </button>
-          <AddTaskModal
-            isOpen={isAddModalOpen}
-            onClose={() => setIsAddModalOpen(false)}
-            addItem={addItem}
+      {/* <h1>{Titles[value]}</h1> */}
+      <h1>{title}</h1>
+      <div className="createTask">
+        <button
+          className="createTaskButton"
+          onClick={() => setIsAddModalOpen(true)}
+        >
+          <AiOutlinePlusCircle
+            style={{ fontSize: '32px', marginRight: '10px' }}
           />
-        </div>
-        <div className="taskListContainer">
-          <ul className="taskListSection">
-            {taskList.map((item, index) => (
-              <li className="taskList" key={index}>
-                <button
-                  className="taskDetails"
-                  onClick={() => openEditModal({ item, index })}
-                >
-                  <strong>{item.title}</strong> - {item.description}
-                </button>
-                <button
-                  className="removeTaskButton"
-                  onClick={() => removeItem(index)}
-                >
-                  Remove
-                </button>
-              </li>
-            ))}
-          </ul>
-          <EditTaskModal
-            isOpen={isEditModalOpen}
-            onClose={() => setIsEditModalOpen(false)}
-            removeItem={removeItem}
-            selectedItem={selectedItem}
-            selectedIndex={selectedIndex}
-            value={value}
-          />
-        </div>
+          Add New Task
+        </button>
+        <AddTaskModal
+          isOpen={isAddModalOpen}
+          onClose={() => setIsAddModalOpen(false)}
+          addItem={addItem}
+        />
+      </div>
+      <div className="taskListContainer">
+        <ul className="taskListSection">
+          {taskList.map((item, index) => (
+            <li className="taskList" key={index}>
+              <button
+                className="taskDetails"
+                onClick={() => openEditModal({ item, index })}
+              >
+                <strong>{item.title}</strong> - {item.description}
+              </button>
+              <button
+                className="removeTaskButton"
+                onClick={() => removeItem(index)}
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+        <EditTaskModal
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          removeItem={removeItem}
+          selectedItem={selectedItem}
+          selectedIndex={selectedIndex}
+          value={value}
+        />
       </div>
     </div>
   );
