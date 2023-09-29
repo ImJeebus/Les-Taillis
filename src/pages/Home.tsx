@@ -9,44 +9,48 @@ const Home = () => {
   const [buttonPositions, setButtonPositions] = useState({}); // Track button positions
   const navigate = useNavigate();
 
+  // Create refs for buttons
+  const buttonRefs = useRef({});
+  users.forEach((user) => {
+    buttonRefs.current[user.value] = useRef(null);
+  });
+
+  // Store the initial button positions when the component mounts
+  useEffect(() => {
+    const initialPositions = calculateInitialButtonPositions();
+    setButtonPositions(initialPositions);
+  }, []);
+
   // Function to calculate initial button positions
   const calculateInitialButtonPositions = () => {
     const positions = {};
     users.forEach((user) => {
-      const button = document.querySelector(`.${user.value}Button`);
+      const button = buttonRefs.current[user.value].current;
       if (button) {
         const buttonRect = button.getBoundingClientRect();
         positions[user.value] = { top: buttonRect.top, left: buttonRect.left };
       }
     });
-    console.log('positions', positions);
+    console.log('initial positions', positions);
     return positions;
   };
-  // Set initial button positions
-  useEffect(() => {
-    const initialPositions = calculateInitialButtonPositions();
-    setButtonPositions(initialPositions);
-  }, [users]);
 
   const handleUserClick = (user) => {
     setSelectedUser(user.value);
     setClickedUser(user.value);
 
-    // get position of button - this is not working properly, looks like its taking the position of the button pushed down as the initial position so it only moves like 2px down
-    const initialButton = document.querySelector(`.${user.value}Button`);
-    const buttonRect = initialButton.getBoundingClientRect();
+    // get the initial position of the button
+    const initialPosition = buttonPositions[user.value];
 
     // Calculate the end position (destination: top center of screen)
-    const centerX = window.innerWidth / 2 - buttonRect.width / 2 - 2.5;
+    const centerX = window.innerWidth / 2 - 55;
     const centerY = 15;
 
-    console.log('before set', buttonPositions);
     // Update the button's position
     setButtonPositions({
       ...buttonPositions,
       [user.value]: { top: centerY, left: centerX },
     });
-    console.log('after set', buttonPositions);
 
     // Navigate after delay
     setTimeout(() => {
@@ -62,6 +66,7 @@ const Home = () => {
           {users.map((user) => (
             <Link
               key={user.value}
+              ref={buttonRefs.current[user.value]}
               className={`homeButton ${user.value}Button ${
                 !clickedUser
                   ? ''
