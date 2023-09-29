@@ -22,7 +22,7 @@ const Home = () => {
     return positions;
   };
 
-  // Set the initial button positions when the component mounts
+  // Set initial button positions
   useEffect(() => {
     const initialPositions = calculateInitialButtonPositions();
     setButtonPositions(initialPositions);
@@ -46,7 +46,7 @@ const Home = () => {
       [user.value]: { top: centerY, left: centerX },
     });
 
-    // Navigate after a delay
+    // Navigate after delay
     setTimeout(() => {
       navigate('/area');
     }, 1500);
