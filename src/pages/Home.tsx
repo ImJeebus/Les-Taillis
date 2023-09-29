@@ -32,7 +32,7 @@ const Home = () => {
     setSelectedUser(user.value);
     setClickedUser(user.value);
 
-    // get position of button
+    // get position of button - this is not working properly, looks like its taking the position of the button pushed down as the initial position so it only moves like 2px down
     const initialButton = document.querySelector(`.${user.value}Button`);
     const buttonRect = initialButton.getBoundingClientRect();
 
