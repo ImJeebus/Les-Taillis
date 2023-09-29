@@ -47,7 +47,6 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
     if (newUpdate.trim() !== '' && taskID) {
       console.log('newUpdate trim', newUpdate.trim());
       try {
-        // Add the update to Firestore
         await addDoc(
           collection(firestore, 'tasks', value, value, taskID, 'Updates'),
           {
@@ -55,9 +54,9 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
             UpdatedBy: selectedUserText,
           }
         );
-        // Clear the input field
+
         setNewUpdate('');
-        // Fetch updates again to update the list
+
         fetchUpdates();
       } catch (error) {
         console.log(error);
@@ -98,8 +97,3 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
 };
 
 export default UpdateTask;
-
-// when type update and press enter/add button
-// update should be stored in firestore database
-// re render the edit task screen
-// list the updates for that task on screen
