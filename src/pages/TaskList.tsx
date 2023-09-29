@@ -86,7 +86,6 @@ const TaskList = () => {
     <div>
       {/* <NavBar /> */}
       <div className="taskContainer">
-        <Profile />
         {/* <h1>{Titles[value]}</h1> */}
         <h1>{title}</h1>
         <div className="createTask">
