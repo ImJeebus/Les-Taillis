@@ -47,9 +47,7 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
             UpdatedBy: selectedUserText,
           }
         );
-
         setNewUpdate('');
-
         fetchUpdates();
       } catch (error) {
         console.log(error);
