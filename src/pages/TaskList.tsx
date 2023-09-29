@@ -83,23 +83,8 @@ const TaskList = () => {
     const itemToRemove = taskList[index];
 
     try {
-      const querySnapshot = await getDocs(
-        collection(firestore, 'tasks', value, value)
-      );
-
-      const matchingDocs = querySnapshot.docs.filter(
-        (doc) =>
-          doc.data().title === itemToRemove.title &&
-          doc.data().description === itemToRemove.description &&
-          doc.id === itemToRemove.id
-      );
-
-      if (matchingDocs.length > 0) {
-        const docToDelete = matchingDocs[0];
-        await deleteDoc(
-          doc(firestore, ...docToDelete._key.path.segments.slice(5))
-        );
-      }
+      // Use the document's ID to directly delete it
+      await deleteDoc(doc(firestore, 'tasks', value, value, itemToRemove.id));
       fetchData();
     } catch (error) {
       console.log(error);
