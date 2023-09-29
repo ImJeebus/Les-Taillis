@@ -84,7 +84,7 @@ const TaskList = () => {
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <div className="taskContainer">
         <Profile />
         {/* <h1>{Titles[value]}</h1> */}

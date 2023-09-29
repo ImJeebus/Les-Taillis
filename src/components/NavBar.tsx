@@ -19,11 +19,11 @@ const NavBar = () => {
           <BiBorderNone />
         </Link>
       )}
-      {/* {location.pathname !== '/' && (
+      {location.pathname !== '/' && (
         <div className="userProfile">
           <Profile />
         </div>
-      )} */}
+      )}
     </div>
   );
 };

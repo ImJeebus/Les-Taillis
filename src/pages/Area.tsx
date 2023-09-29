@@ -1,6 +1,7 @@
 import './Area.css';
 import { Link } from 'react-router-dom';
 import Profile from '../components/Profiles/Profile';
+import NavBar from '../components/NavBar';
 
 export const buttons = [
   { value: 'adminLegal', text: 'Admin / Legal' },
