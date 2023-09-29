@@ -36,8 +36,6 @@ const TaskList = () => {
     allTasks: 'All Tasks',
   };
 
-  const [newItem, setNewItem] = useState('');
-  const [newDescription, setNewDescription] = useState('');
   const [taskList, setTaskList] = useState([]);
 
   const openEditModal = ({ item, index }) => {
@@ -77,9 +75,6 @@ const TaskList = () => {
       } catch (error) {
         console.log(error);
       }
-
-      setNewItem('');
-      setNewDescription('');
     }
   };
 
