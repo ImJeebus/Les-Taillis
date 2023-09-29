@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
 import './AddTaskModal.css';
 
-const AddTaskModal = ({
-  isOpen,
-  onClose,
-  addItem,
-  newItem,
-  setNewItem,
-  newDescription,
-  setNewDescription,
-}) => {
+const AddTaskModal = ({ isOpen, onClose, addItem }) => {
+  const [newItem, setNewItem] = useState('');
+  const [newDescription, setNewDescription] = useState('');
+
   const handleAddItem = () => {
-    if (newItem.trim() !== '' /* && newDescription.trim() !== '' */) {
-      addItem({ title: newItem, description: newDescription }); // Pass an object with title and description
+    if (newItem.trim() !== '') {
+      addItem({ title: newItem, description: newDescription });
       setNewItem('');
       setNewDescription('');
       onClose();
     }
   };
+
   if (!isOpen) return null;
 
   return (
@@ -26,6 +22,7 @@ const AddTaskModal = ({
         Task
         <input
           type="text"
+          id="title"
           className="inputTitle"
           placeholder="Enter Title"
           value={newItem}
@@ -33,15 +30,16 @@ const AddTaskModal = ({
         />
         Description
         <input
-          type="textarea"
+          type="text"
+          id="description"
           className="inputDescription"
-          placeholder={'Enter Description'}
+          placeholder="Enter Description"
           value={newDescription}
           onChange={(e) => setNewDescription(e.target.value)}
         />
         <button className="addItemButton" onClick={handleAddItem}>
           Add Item
-        </button>{' '}
+        </button>
       </div>
       <button className="addTaskModalCloseButton" onClick={onClose}>
         Close

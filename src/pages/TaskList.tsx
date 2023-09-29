@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './TaskList.css';
-import AddTaskModal from './../components/Tasks/AddTaskModal';
-import EditTaskModal from './../components/Tasks/EditTaskModal';
+import { useUser } from '../UserContext';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { useParams } from 'react-router-dom';
 import { firestore } from './../firebase';
-import { Link, useParams } from 'react-router-dom';
 import {
   doc,
   collection,
@@ -12,8 +11,10 @@ import {
   deleteDoc,
   getDocs,
 } from 'firebase/firestore';
-import { useUser } from '../UserContext';
 import NavBar from '../components/NavBar';
+import Profile from '../components/Profiles/Profile';
+import AddTaskModal from './../components/Tasks/AddTaskModal';
+import EditTaskModal from './../components/Tasks/EditTaskModal';
 
 const TaskList = () => {
   const { selectedUser, users } = useUser();
@@ -25,9 +26,6 @@ const TaskList = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [newItem, setNewItem] = useState('');
-  const [newDescription, setNewDescription] = useState('');
-  const [taskList, setTaskList] = useState([]);
 
   const Titles = {
     mainHouse: 'Main House',
@@ -38,6 +36,8 @@ const TaskList = () => {
     adminLegal: 'Admin / Legal',
     allTasks: 'All Tasks',
   };
+
+  const [taskList, setTaskList] = useState([]);
 
   const openEditModal = ({ item, index }) => {
     setSelectedItem(item);
@@ -76,9 +76,6 @@ const TaskList = () => {
       } catch (error) {
         console.log(error);
       }
-
-      setNewItem('');
-      setNewDescription('');
     }
   };
 
@@ -86,23 +83,7 @@ const TaskList = () => {
     const itemToRemove = taskList[index];
 
     try {
-      const querySnapshot = await getDocs(
-        collection(firestore, 'tasks', value, value)
-      );
-
-      const matchingDocs = querySnapshot.docs.filter(
-        (doc) =>
-          doc.data().title === itemToRemove.title &&
-          doc.data().description === itemToRemove.description &&
-          doc.id === itemToRemove.id
-      );
-
-      if (matchingDocs.length > 0) {
-        const docToDelete = matchingDocs[0];
-        await deleteDoc(
-          doc(firestore, ...docToDelete._key.path.segments.slice(5))
-        );
-      }
+      await deleteDoc(doc(firestore, 'tasks', value, value, itemToRemove.id));
       fetchData();
     } catch (error) {
       console.log(error);
@@ -111,8 +92,8 @@ const TaskList = () => {
 
   return (
     <div>
-      {' '}
       <NavBar />
+      <Profile />
       <div className="taskContainer">
         <h1>{Titles[value]}</h1>
         <div className="createTask">
@@ -128,12 +109,7 @@ const TaskList = () => {
           <AddTaskModal
             isOpen={isAddModalOpen}
             onClose={() => setIsAddModalOpen(false)}
-            areaButtonValue={value}
             addItem={addItem}
-            newItem={newItem}
-            setNewItem={setNewItem}
-            newDescription={newDescription}
-            setNewDescription={setNewDescription}
           />
         </div>
         <div className="taskListContainer">

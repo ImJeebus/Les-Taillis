@@ -20,17 +20,11 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
       const updatesQuery = query(
         collection(firestore, 'tasks', value, value, taskID, 'Updates')
       );
-      console.log('update query', updatesQuery);
-
       const updatesSnapshot = await getDocs(updatesQuery);
-      console.log('update snapshot', updatesSnapshot);
-
       const updateData = updatesSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      console.log('update data', updateData);
-
       setUpdates(updateData);
     } catch (error) {
       console.log(error);
@@ -45,9 +39,7 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
 
   const handleUpdateTask = async () => {
     if (newUpdate.trim() !== '' && taskID) {
-      console.log('newUpdate trim', newUpdate.trim());
       try {
-        // Add the update to Firestore
         await addDoc(
           collection(firestore, 'tasks', value, value, taskID, 'Updates'),
           {
@@ -55,9 +47,7 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
             UpdatedBy: selectedUserText,
           }
         );
-        // Clear the input field
         setNewUpdate('');
-        // Fetch updates again to update the list
         fetchUpdates();
       } catch (error) {
         console.log(error);
@@ -98,8 +88,3 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
 };
 
 export default UpdateTask;
-
-// when type update and press enter/add button
-// update should be stored in firestore database
-// re render the edit task screen
-// list the updates for that task on screen
