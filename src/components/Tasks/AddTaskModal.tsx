@@ -4,7 +4,6 @@ import './AddTaskModal.css';
 const AddTaskModal = ({
   isOpen,
   onClose,
-  areaButtonValue,
   addItem,
   newItem,
   setNewItem,
@@ -38,12 +37,11 @@ const AddTaskModal = ({
           className="inputDescription"
           placeholder={'Enter Description'}
           value={newDescription}
-          onChange={(e) => setNewDescription(e.target.value)} // Handle description input
+          onChange={(e) => setNewDescription(e.target.value)}
         />
         <button className="addItemButton" onClick={handleAddItem}>
           Add Item
         </button>{' '}
-        {/* Use handleAddItem here */}
       </div>
       <button className="addTaskModalCloseButton" onClick={onClose}>
         Close

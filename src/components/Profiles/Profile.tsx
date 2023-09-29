@@ -53,7 +53,10 @@ const Profile = () => {
               >
                 Logout
               </button>
-              <button className="profileCloseButton" onClick={handleClosedClick}>
+              <button
+                className="profileCloseButton"
+                onClick={handleClosedClick}
+              >
                 Close
               </button>
             </div>

@@ -25,6 +25,9 @@ const TaskList = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [newItem, setNewItem] = useState('');
+  const [newDescription, setNewDescription] = useState('');
+  const [taskList, setTaskList] = useState([]);
 
   const Titles = {
     mainHouse: 'Main House',
@@ -35,10 +38,6 @@ const TaskList = () => {
     adminLegal: 'Admin / Legal',
     allTasks: 'All Tasks',
   };
-
-  const [newItem, setNewItem] = useState('');
-  const [newDescription, setNewDescription] = useState('');
-  const [taskList, setTaskList] = useState([]);
 
   const openEditModal = ({ item, index }) => {
     setSelectedItem(item);
