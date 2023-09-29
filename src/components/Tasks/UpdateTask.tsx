@@ -20,14 +20,11 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
       const updatesQuery = query(
         collection(firestore, 'tasks', value, value, taskID, 'Updates')
       );
-
       const updatesSnapshot = await getDocs(updatesQuery);
-
       const updateData = updatesSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-
       setUpdates(updateData);
     } catch (error) {
       console.log(error);
