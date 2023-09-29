@@ -83,7 +83,6 @@ const TaskList = () => {
     const itemToRemove = taskList[index];
 
     try {
-      // Use the document's ID to directly delete it
       await deleteDoc(doc(firestore, 'tasks', value, value, itemToRemove.id));
       fetchData();
     } catch (error) {
