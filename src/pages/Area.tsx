@@ -15,7 +15,6 @@ const Area = () => {
 
   return (
     <div className="areaContainer">
-      {/* <NavBar /> */}
       <Profile />
       <div className="areaGridContainer">
         <div className="areaGrid">
