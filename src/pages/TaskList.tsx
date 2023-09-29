@@ -15,6 +15,7 @@ import NavBar from '../components/NavBar';
 import Profile from '../components/Profiles/Profile';
 import AddTaskModal from './../components/Tasks/AddTaskModal';
 import EditTaskModal from './../components/Tasks/EditTaskModal';
+import { buttons } from './Area';
 
 const TaskList = () => {
   const { selectedUser, users } = useUser();
@@ -27,15 +28,7 @@ const TaskList = () => {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const Titles = {
-    mainHouse: 'Main House',
-    pidge: 'Pidge',
-    barn: 'Barn',
-    poolArea: 'Pool Area',
-    marketing: 'Marketing',
-    adminLegal: 'Admin / Legal',
-    allTasks: 'All Tasks',
-  };
+ const title = buttons.find((button) => button.value === value)?.text;
 
   const [taskList, setTaskList] = useState([]);
 
@@ -95,7 +88,8 @@ const TaskList = () => {
       <NavBar />
       <Profile />
       <div className="taskContainer">
-        <h1>{Titles[value]}</h1>
+        {/* <h1>{Titles[value]}</h1> */}
+        <h1>{title}</h1>
         <div className="createTask">
           <button
             className="createTaskButton"
