@@ -55,14 +55,20 @@ export const App = () => {
   }, [selectedUser, navigate]);
 
   return (
-    <Routes>
-      <Route exact path="/" element={<Home />} />
-      <Route path="/area" element={<PageProperties component={<Area />} />} />
-      <Route
-        path="/tasklist/:value"
-        element={<PageProperties component={<TaskList />} />}
-      />
-    </Routes>
+    <div>
+      {' '}
+      <div>
+        <NavBar />
+      </div>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/area" element={<PageProperties component={<Area />} />} />
+        <Route
+          path="/tasklist/:value"
+          element={<PageProperties component={<TaskList />} />}
+        />
+      </Routes>{' '}
+    </div>
   );
 };
 

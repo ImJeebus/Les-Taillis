@@ -16,7 +16,7 @@ export const buttons = [
 const Area = () => {
   return (
     <div className="areaContainer">
-      <Profile />
+      {/* <NavBar /> */}
       <div className="areaGridContainer">
         <div className="areaGrid">
           {buttons.map(({ value, text }) => (
