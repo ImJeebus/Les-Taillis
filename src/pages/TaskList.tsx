@@ -14,6 +14,7 @@ import {
 } from 'firebase/firestore';
 import { useUser } from '../UserContext';
 import NavBar from '../components/NavBar';
+import Profile from '../components/Profiles/Profile';
 
 const TaskList = () => {
   const { selectedUser, users } = useUser();
@@ -108,6 +109,7 @@ const TaskList = () => {
   return (
     <div>
       <NavBar />
+      <Profile />
       <div className="taskContainer">
         <h1>{Titles[value]}</h1>
         <div className="createTask">
