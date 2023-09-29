@@ -14,6 +14,11 @@ const NavBar = () => {
           <Profile />
         </div>
       )}
+      {location.pathname !== '/' && location.pathname !== '/area' && (
+        <Link to="/area" className="navBarArea">
+          <BiBorderNone />
+        </Link>
+      )}
     </div>
   );
 };
