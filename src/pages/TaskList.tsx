@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './TaskList.css';
-import AddTaskModal from './../components/Tasks/AddTaskModal';
-import EditTaskModal from './../components/Tasks/EditTaskModal';
+import { useUser } from '../UserContext';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { firestore } from './../firebase';
 import { useParams } from 'react-router-dom';
+import { firestore } from './../firebase';
 import {
   doc,
   collection,
@@ -12,9 +11,10 @@ import {
   deleteDoc,
   getDocs,
 } from 'firebase/firestore';
-import { useUser } from '../UserContext';
 import NavBar from '../components/NavBar';
 import Profile from '../components/Profiles/Profile';
+import AddTaskModal from './../components/Tasks/AddTaskModal';
+import EditTaskModal from './../components/Tasks/EditTaskModal';
 
 const TaskList = () => {
   const { selectedUser, users } = useUser();
