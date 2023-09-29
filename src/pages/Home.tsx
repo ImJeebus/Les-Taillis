@@ -64,13 +64,13 @@ const Home = () => {
                 !clickedUser
                   ? ''
                   : clickedUser === user.value
-                  ? 'centered' // Apply a class for centered position
+                  ? 'centered'
                   : `hidden`
               }`}
               onClick={() => handleUserClick(user)}
               style={{
                 backgroundColor: user.color,
-                ...buttonPositions[user.value], // Apply the dynamic button position
+                ...buttonPositions[user.value],
               }}
             >
               {user.text}

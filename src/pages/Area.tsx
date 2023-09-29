@@ -1,8 +1,5 @@
-import { useState } from 'react';
 import './Area.css';
-import { Link, redirect } from 'react-router-dom';
-import { useUser } from '../UserContext';
-import NavBar from '../components/NavBar';
+import { Link } from 'react-router-dom';
 import Profile from '../components/Profiles/Profile';
 
 const Area = () => {
