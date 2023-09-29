@@ -19,9 +19,9 @@ const Home = () => {
         positions[user.value] = { top: buttonRect.top, left: buttonRect.left };
       }
     });
+    console.log('positions', positions);
     return positions;
   };
-
   // Set initial button positions
   useEffect(() => {
     const initialPositions = calculateInitialButtonPositions();
@@ -40,11 +40,13 @@ const Home = () => {
     const centerX = window.innerWidth / 2 - buttonRect.width / 2 - 2.5;
     const centerY = 15;
 
+    console.log('before set', buttonPositions);
     // Update the button's position
     setButtonPositions({
       ...buttonPositions,
       [user.value]: { top: centerY, left: centerX },
     });
+    console.log('after set', buttonPositions);
 
     // Navigate after delay
     setTimeout(() => {
