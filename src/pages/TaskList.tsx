@@ -4,7 +4,7 @@ import AddTaskModal from './../components/Tasks/AddTaskModal';
 import EditTaskModal from './../components/Tasks/EditTaskModal';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { firestore } from './../firebase';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   doc,
   collection,
