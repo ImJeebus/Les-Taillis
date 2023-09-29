@@ -23,7 +23,7 @@ import EditTaskModal from './components/Tasks/EditTaskModal';
 const PageProperties = ({ component: Component }) => {
   const { selectedUser, users } = useUser();
   const user = users.find((u) => u.value === selectedUser);
-  const userColor = user ? user.color : 'rgba(80, 187, 251, 1)'; // Default color
+  const userColor = user ? user.color : 'rgba(0, 0, 0, 1)'; // Default color
   console.log('selected user is', selectedUser);
 
   return (
