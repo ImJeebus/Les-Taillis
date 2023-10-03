@@ -3,6 +3,8 @@ import './Home.css';
 import { useUser } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 
+const MARGIN_PADDING = 15;
+
 const Home = () => {
   const { setSelectedUser, users } = useUser();
   const [clickedUser, setClickedUser] = useState(null);
@@ -44,7 +46,7 @@ const Home = () => {
 
     // Calculate the end position (destination: top center of screen)
     const centerX = window.innerWidth / 2 - 55;
-    const centerY = 15;
+    const centerY = MARGIN_PADDING;
 
     // Update the button's position
     setButtonPositions({
