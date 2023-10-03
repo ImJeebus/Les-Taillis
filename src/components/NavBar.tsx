@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import './NavBar.css';
-import { BiHomeAlt, BiBorderNone, BiTask } from 'react-icons/bi';
+import { BiBorderNone } from 'react-icons/bi';
 import Profile from './Profiles/Profile';
 import { Link, useLocation } from 'react-router-dom';
+
+// const navItems = [
+//   {path: '/area', icon: <BiBorderNone />, showProfile: true }
+//   {path: '/area/taskList', icon: }
+// ]
 
 const NavBar = () => {
   const location = useLocation();
