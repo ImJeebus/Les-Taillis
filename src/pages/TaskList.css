@@ -10,6 +10,10 @@ p {
 h1 {
 }
 
+ul {
+  padding: 0px;
+}
+
 .taskContainer {
   display: flex;
   flex-direction: column;
@@ -68,9 +72,11 @@ h1 {
 }
 
 .taskListContainer {
-display: flex;
-align-items: center;
-width: 100%;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .taskListSection {
@@ -105,6 +111,7 @@ width: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 350px;
   margin: 0;
+  margin-right: 20px;
 }
 
 .taskDetails:hover {
@@ -131,7 +138,9 @@ width: 100%;
   color: #fff;
   border: none;
   cursor: pointer;
-  padding: 5px 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px lightgrey;
 }
 
 .removeTaskButton:hover {
