@@ -6,10 +6,13 @@ import { Link, useNavigate } from 'react-router-dom';
 const MARGIN_PADDING = 15;
 
 const Home = () => {
-  const { setSelectedUser, users } = useUser();
+  // const { setSelectedUser, users } = useUser();
   const [clickedUser, setClickedUser] = useState(null);
   const [buttonPositions, setButtonPositions] = useState({}); // Track button positions
   const navigate = useNavigate();
+
+  const { userState, userDispatch } = useUser();
+  const { users } = userState;
 
   // Create refs for buttons
   const buttonRefs = useRef({});
@@ -41,7 +44,10 @@ const Home = () => {
   };
 
   const handleUserClick = (user) => {
-    setSelectedUser(user.username);
+    // setSelectedUser(user.username);
+
+    userDispatch({ type: 'UPDATE_USERNAME', payload: user.username });
+
     setClickedUser(user.username);
 
     // get the initial position of the button

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
+import { useUserReducer } from './userReducer';
 // HOMEWORK: change User Context to useReducer Hook
 
 // Define the user data type
@@ -13,19 +14,29 @@ interface User {
 const UserContext = createContext<any>(null);
 
 // Create the context provider
+// export const UserProvider: React.FC = ({ children }) => {
+//   const [selectedUser, setSelectedUser] = useState<string | null>(null);
+//   const users: User[] = [
+//     { username: 'eddie', text: 'Eddie', color: 'lightblue' },
+//     { username: 'lucia', text: 'Lucia', color: 'lightskyblue' },
+//     { username: 'gma', text: 'Gma', color: 'lightgreen' },
+//     { username: 'sarah', text: 'Sarah', color: 'lightpink' },
+//     { username: 'lino', text: 'Lino', color: 'lightseagreen' },
+//     { username: 'elisa', text: 'Elisa', color: 'lightsalmon' },
+//   ];
+
+//   return (
+//     <UserContext.Provider value={{ selectedUser, setSelectedUser, users }}>
+//       {children}
+//     </UserContext.Provider>
+//   );
+// };
+
 export const UserProvider: React.FC = ({ children }) => {
-  const [selectedUser, setSelectedUser] = useState<string | null>(null);
-  const users: User[] = [
-    { username: 'eddie', text: 'Eddie', color: 'lightblue' },
-    { username: 'lucia', text: 'Lucia', color: 'lightskyblue' },
-    { username: 'gma', text: 'Gma', color: 'lightgreen' },
-    { username: 'sarah', text: 'Sarah', color: 'lightpink' },
-    { username: 'lino', text: 'Lino', color: 'lightseagreen' },
-    { username: 'elisa', text: 'Elisa', color: 'lightsalmon' },
-  ];
+  const [userState, userDispatch] = useUserReducer(); // Use the userReducer and initialState from userReducer.tsx
 
   return (
-    <UserContext.Provider value={{ selectedUser, setSelectedUser, users }}>
+    <UserContext.Provider value={{ userState, userDispatch }}>
       {children}
     </UserContext.Provider>
   );

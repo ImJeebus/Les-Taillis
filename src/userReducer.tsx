@@ -1,9 +1,14 @@
 import { useReducer } from 'react';
 
 const initialState = {
-  username: '',
-  text: '',
-  color: '',
+  users: [
+    { username: 'eddie', text: 'Eddie', color: 'lightblue' },
+    { username: 'lucia', text: 'Lucia', color: 'lightskyblue' },
+    { username: 'gma', text: 'Gma', color: 'lightgreen' },
+    { username: 'sarah', text: 'Sarah', color: 'lightpink' },
+    { username: 'lino', text: 'Lino', color: 'lightseagreen' },
+    { username: 'elisa', text: 'Elisa', color: 'lightsalmon' },
+  ],
 };
 
 function userReducer(state, action) {
