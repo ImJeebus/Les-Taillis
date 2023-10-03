@@ -21,7 +21,11 @@ import NavBar from './components/NavBar';
 import EditTaskModal from './components/Tasks/EditTaskModal';
 
 const PageProperties = ({ component: Component }) => {
-  const { selectedUser, users } = useUser();
+  // const { selectedUser, users } = useUser();
+
+  const { userState, userDispatch } = useUser();
+  const { users, selectedUser } = userState;
+
   const user = users.find((u) => u.username === selectedUser);
   const userColor = user ? user.color : 'rgba(0, 0, 0, 1)'; // Default color
   console.log('selected user is', selectedUser);
@@ -39,7 +43,12 @@ const PageProperties = ({ component: Component }) => {
 };
 
 export const App = () => {
-  const { selectedUser } = useUser();
+  // const { selectedUser } = useUser();
+
+  const { userState, userDispatch } = useUser();
+  const { users, selectedUser } = userState;
+  console.log('app selected user is:', selectedUser);
+
   const navigate = useNavigate();
 
   const selectedItem = {
