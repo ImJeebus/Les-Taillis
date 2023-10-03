@@ -89,13 +89,44 @@ const Home = () => {
   console.log('filter 2 example', filterExampleAsMap);
 
   const reduceExample = users.reduce((acc, user) => {
-    if (user.value === "eddie") {
-      return [acc, user.color]
+    if (user.value === 'eddie') {
+      return [acc, user.color];
     } else {
-      return acc
+      return acc;
     }
   }, []);
-  console.log('reduce example',reduceExample)
+  console.log('reduce example', reduceExample);
+
+  // can write reduces a for loops (in (index) vs of (object))
+
+  const acc = [];
+  for (const user of users) {
+    if (user.value === 'eddie') {
+      acc.push(user.color);
+    }
+    // console.log('for user', user);
+  }
+  console.log('for acc is', acc);
+
+  const exampleUser = users[0];
+  console.log('object keys', Object.keys(exampleUser));
+  // console.log("object values", Object.values(exampleUser))
+
+  const exUser = Object.keys(exampleUser).reduce((acc, userKey) => {
+    const value = exampleUser[userKey];
+    return {
+      ...acc,
+      [userKey]: value,
+    };
+  }, {});
+  console.log('ex user', exUser);
+
+  const nameKey = 'name';
+
+  const myObj = {
+    [nameKey]: 'eddie',
+    age: 30,
+  };
 
   return (
     <div className="homeContainer">
