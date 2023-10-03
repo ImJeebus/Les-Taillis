@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 
+// HOMEWORK: change User Context to useReducer Hook
+
 // Define the user data type
 interface User {
   value: string;
