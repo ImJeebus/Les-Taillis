@@ -14,7 +14,7 @@ const Home = () => {
   // Create refs for buttons
   const buttonRefs = useRef({});
   users.forEach((user) => {
-    buttonRefs.current[user.value] = useRef(null);
+    buttonRefs.current[user.username] = useRef(null);
   });
 
   // Store the initial button positions when the component mounts
@@ -27,10 +27,13 @@ const Home = () => {
   const calculateInitialButtonPositions = () => {
     const positions = {};
     users.forEach((user) => {
-      const button = buttonRefs.current[user.value].current;
+      const button = buttonRefs.current[user.username].current;
       if (button) {
         const buttonRect = button.getBoundingClientRect();
-        positions[user.value] = { top: buttonRect.top, left: buttonRect.left };
+        positions[user.username] = {
+          top: buttonRect.top,
+          left: buttonRect.left,
+        };
       }
     });
     console.log('initial positions', positions);
@@ -38,11 +41,11 @@ const Home = () => {
   };
 
   const handleUserClick = (user) => {
-    setSelectedUser(user.value);
-    setClickedUser(user.value);
+    setSelectedUser(user.username);
+    setClickedUser(user.username);
 
     // get the initial position of the button
-    const initialPosition = buttonPositions[user.value];
+    const initialPosition = buttonPositions[user.username];
 
     // Calculate the end position (destination: top center of screen)
     const centerX = window.innerWidth / 2 - 55;
@@ -51,7 +54,7 @@ const Home = () => {
     // Update the button's position
     setButtonPositions({
       ...buttonPositions,
-      [user.value]: { top: centerY, left: centerX },
+      [user.username]: { top: centerY, left: centerX },
     });
 
     // Navigate after delay
@@ -72,13 +75,13 @@ const Home = () => {
   console.log('map example', mapExample);
 
   const findExample = users.find((user) => {
-    return user.value === 'eddie';
+    return user.username === 'eddie';
   });
   console.log('find example', findExample.color);
 
   const filterExample = users
     .filter((user) => {
-      return user.value === 'eddie';
+      return user.username === 'eddie';
     })
     .map((filteredUser) => {
       return filteredUser.color;
@@ -86,12 +89,12 @@ const Home = () => {
   console.log('filter example', filterExample);
 
   const filterExampleAsMap = users.map((user) => {
-    return user.value === 'eddie' && user.color;
+    return user.username === 'eddie' && user.color;
   });
   console.log('filter 2 example', filterExampleAsMap);
 
   const reduceExample = users.reduce((acc, user) => {
-    if (user.value === 'eddie') {
+    if (user.username === 'eddie') {
       return [acc, user.color];
     } else {
       return acc;
@@ -103,7 +106,7 @@ const Home = () => {
 
   const acc = [];
   for (const user of users) {
-    if (user.value === 'eddie') {
+    if (user.username === 'eddie') {
       acc.push(user.color);
     }
     // console.log('for user', user);
@@ -137,19 +140,19 @@ const Home = () => {
         <div className={'buttonGrid'}>
           {users.map((user) => (
             <Link
-              key={user.value}
-              ref={buttonRefs.current[user.value]}
-              className={`homeButton ${user.value}Button ${
+              key={user.username}
+              ref={buttonRefs.current[user.username]}
+              className={`homeButton ${user.username}Button ${
                 !clickedUser
                   ? ''
-                  : clickedUser === user.value
+                  : clickedUser === user.username
                   ? 'centered'
                   : `hidden`
               }`}
               onClick={() => handleUserClick(user)}
               style={{
                 backgroundColor: user.color,
-                ...buttonPositions[user.value],
+                ...buttonPositions[user.username],
               }}
             >
               {user.text}

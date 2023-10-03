@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState } from 'react';
 
 // Define the user data type
 interface User {
-  value: string;
+  username: string;
   text: string;
   color: string;
 }
@@ -16,13 +16,12 @@ const UserContext = createContext<any>(null);
 export const UserProvider: React.FC = ({ children }) => {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const users: User[] = [
-    { value: 'eddie', text: 'Eddie', color: 'lightblue' },
-    { value: 'lucia', text: 'Lucia', color: 'lightskyblue' },
-    { value: 'gma', text: 'Gma', color: 'lightgreen' },
-    { value: 'sarah', text: 'Sarah', color: 'lightpink' },
-    { value: 'lino', text: 'Lino', color: 'lightseagreen' },
-    { value: 'elisa', text: 'Elisa', color: 'lightsalmon' },
-    { value: 'eddie', text: 'Eddie2', color: 'lightblue2' },
+    { username: 'eddie', text: 'Eddie', color: 'lightblue' },
+    { username: 'lucia', text: 'Lucia', color: 'lightskyblue' },
+    { username: 'gma', text: 'Gma', color: 'lightgreen' },
+    { username: 'sarah', text: 'Sarah', color: 'lightpink' },
+    { username: 'lino', text: 'Lino', color: 'lightseagreen' },
+    { username: 'elisa', text: 'Elisa', color: 'lightsalmon' },
   ];
 
   return (

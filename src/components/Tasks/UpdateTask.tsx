@@ -10,7 +10,7 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
 
   const { selectedUser, users } = useUser();
   const selectedUserText = users.find(
-    (user) => user.value === selectedUser
+    (user) => user.username === selectedUser
   )?.text;
 
   const taskID = selectedItem.id;
