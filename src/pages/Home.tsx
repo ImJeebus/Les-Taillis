@@ -58,6 +58,45 @@ const Home = () => {
     }, 1500);
   };
 
+  // testing methods on arrays
+  // find, map, filter, reduce
+
+  const mapExample = users.map((user) => {
+    return {
+      ...user,
+      text: user.text + 'hello',
+    };
+  });
+  console.log('map example', mapExample);
+
+  const findExample = users.find((user) => {
+    return user.value === 'eddie';
+  });
+  console.log('find example', findExample.color);
+
+  const filterExample = users
+    .filter((user) => {
+      return user.value === 'eddie';
+    })
+    .map((filteredUser) => {
+      return filteredUser.color;
+    });
+  console.log('filter example', filterExample);
+
+  const filterExampleAsMap = users.map((user) => {
+    return user.value === 'eddie' && user.color;
+  });
+  console.log('filter 2 example', filterExampleAsMap);
+
+  const reduceExample = users.reduce((acc, user) => {
+    if (user.value === "eddie") {
+      return [acc, user.color]
+    } else {
+      return acc
+    }
+  }, []);
+  console.log('reduce example',reduceExample)
+
   return (
     <div className="homeContainer">
       {clickedUser ? null : <h1>Les Taillis</h1>}
