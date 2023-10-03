@@ -20,7 +20,6 @@ export const UserProvider: React.FC = ({ children }) => {
     { value: 'sarah', text: 'Sarah', color: 'lightpink' },
     { value: 'lino', text: 'Lino', color: 'lightseagreen' },
     { value: 'elisa', text: 'Elisa', color: 'lightsalmon' },
-    // Add more users with their colors here
   ];
 
   return (
