@@ -22,7 +22,6 @@ export const UserProvider: React.FC = ({ children }) => {
     { value: 'sarah', text: 'Sarah', color: 'lightpink' },
     { value: 'lino', text: 'Lino', color: 'lightseagreen' },
     { value: 'elisa', text: 'Elisa', color: 'lightsalmon' },
-    { value: 'eddie', text: 'Eddie2', color: 'lightblue2' },
   ];
 
   return (
