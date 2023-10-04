@@ -4,12 +4,16 @@ import { useUser } from '../../UserContext';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-  const { selectedUser, users } = useUser();
+  // const { selectedUser, users } = useUser();
+
+  const { userState, userDispatch } = useUser();
+  const { selectedUser, users } = userState;
+
   const selectedUserColor = users.find(
-    (user) => user.value === selectedUser
+    (user) => user.username === selectedUser
   )?.color;
   const selectedUserText = users.find(
-    (user) => user.value === selectedUser
+    (user) => user.username === selectedUser
   )?.text;
 
   const [expanded, setExpanded] = useState(false);
