@@ -20,7 +20,7 @@ import { buttons } from './Area';
 const TaskList = () => {
   const { selectedUser, users } = useUser();
   const selectedUserText = users.find(
-    (user) => user.value === selectedUser
+    (user) => user.username === selectedUser
   )?.text;
   const { value } = useParams();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
