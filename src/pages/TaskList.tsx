@@ -72,6 +72,8 @@ const TaskList = () => {
     }
   };
 
+  // hi
+
   const removeItem = async (index) => {
     const itemToRemove = taskList[index];
     try {
