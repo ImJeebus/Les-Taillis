@@ -25,7 +25,7 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
         id: doc.id,
         ...doc.data(),
       }));
-      setUpdates(updateData);
+      const sortedUpdates = setUpdates(updateData);
     } catch (error) {
       console.log(error);
     }
@@ -45,6 +45,7 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
           {
             UpdateText: newUpdate,
             UpdatedBy: selectedUserText,
+            UpdatedTimetamp: new Date().getTime,
           }
         );
         setNewUpdate('');
