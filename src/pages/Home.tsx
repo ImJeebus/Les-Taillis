@@ -30,7 +30,10 @@ const Home = () => {
       const button = buttonRefs.current[user.username].current;
       if (button) {
         const buttonRect = button.getBoundingClientRect();
-        positions[user.username] = { top: buttonRect.top, left: buttonRect.left };
+        positions[user.username] = {
+          top: buttonRect.top,
+          left: buttonRect.left,
+        };
       }
     });
     console.log('initial positions', positions);
@@ -63,72 +66,71 @@ const Home = () => {
   // testing methods on arrays
   // find, map, filter, reduce
 
-  const mapExample = users.map((user) => {
-    return {
-      ...user,
-      text: user.text + 'hello',
-    };
-  });
-  console.log('map example', mapExample);
+  // const mapExample = users.map((user) => {
+  //   return {
+  //     ...user,
+  //     text: user.text + 'hello',
+  //   };
+  // });
+  // console.log('map example', mapExample);
 
-  const findExample = users.find((user) => {
-    return user.username === 'eddie';
-  });
-  console.log('find example', findExample.color);
+  // const findExample = users.find((user) => {
+  //   return user.username === 'eddie';
+  // });
+  // console.log('find example', findExample.color);
 
-  const filterExample = users
-    .filter((user) => {
-      return user.username === 'eddie';
-    })
-    .map((filteredUser) => {
-      return filteredUser.color;
-    });
-  console.log('filter example', filterExample);
+  // const filterExample = users
+  //   .filter((user) => {
+  //     return user.username === 'eddie';
+  //   })
+  //   .map((filteredUser) => {
+  //     return filteredUser.color;
+  //   });
+  // console.log('filter example', filterExample);
 
-  const filterExampleAsMap = users.map((user) => {
-    return user.username === 'eddie' && user.color;
-  });
-  console.log('filter 2 example', filterExampleAsMap);
+  // const filterExampleAsMap = users.map((user) => {
+  //   return user.username === 'eddie' && user.color;
+  // });
+  // console.log('filter 2 example', filterExampleAsMap);
 
-  const reduceExample = users.reduce((acc, user) => {
-    if (user.username === 'eddie') {
-      return [acc, user.color];
-    } else {
-      return acc;
-    }
-  }, []);
-  console.log('reduce example', reduceExample);
+  // const reduceExample = users.reduce((acc, user) => {
+  //   if (user.username === 'eddie') {
+  //     return [acc, user.color];
+  //   } else {
+  //     return acc;
+  //   }
+  // }, []);
+  // console.log('reduce example', reduceExample);
 
   // can write reduces a for loops (in (index) vs of (object))
 
-  const acc = [];
-  for (const user of users) {
-    if (user.username === 'eddie') {
-      acc.push(user.color);
-    }
-    // console.log('for user', user);
-  }
-  console.log('for acc is', acc);
+  // const acc = [];
+  // for (const user of users) {
+  //   if (user.username === 'eddie') {
+  //     acc.push(user.color);
+  //   }
+  // }
+  // console.log('for acc is', acc);
 
-  const exampleUser = users[0];
-  console.log('object keys', Object.keys(exampleUser));
+  // const exampleUser = users[0];
+  // console.log('object keys', Object.keys(exampleUser));
   // console.log("object values", Object.values(exampleUser))
 
-  const exUser = Object.keys(exampleUser).reduce((acc, userKey) => {
-    const value = exampleUser[userKey];
-    return {
-      ...acc,
-      [userKey]: value,
-    };
-  }, {});
-  console.log('ex user', exUser);
+  // const exUser = Object.keys(exampleUser).reduce((acc, userKey) => {
+  //   const value = exampleUser[userKey];
+  //   return {
+  //     ...acc,
+  //     [userKey]: value,
+  //   };
+  // }, {});
+  // console.log('ex user', exUser);
 
-  const nameKey = 'name';
+  // const nameKey = 'name';
 
-  const myObj = {
-    [nameKey]: 'eddie',
-    age: 30,
-  };
+  // const myObj = {
+  //   [nameKey]: 'eddie',
+  //   age: 30,
+  // };
 
   return (
     <div className="homeContainer">

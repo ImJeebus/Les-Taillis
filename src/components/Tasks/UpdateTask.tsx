@@ -25,12 +25,21 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
         id: doc.id,
         ...doc.data(),
       }));
-      const sortedUpdates = setUpdates(updateData);
+      console.log('pre sorted', updateData);
+
+      const sortedUpdates = updateData.sort((a, b) => {
+        console.log('a is', a.UpdatedTimestamp);
+        console.log('b is', b.UpdatedTimestamp);
+        return a.UpdatedTimestamp - b.UpdatedTimestamp;
+      });
+      setUpdates(sortedUpdates);
+      console.log('sorted updates is', sortedUpdates);
     } catch (error) {
       console.log(error);
     }
   };
 
+  useEffect(() => {}, [updates]);
   useEffect(() => {
     if (taskID) {
       fetchUpdates();
@@ -39,13 +48,14 @@ const UpdateTask = ({ selectedItem, selectedIndex, value }) => {
 
   const handleUpdateTask = async () => {
     if (newUpdate.trim() !== '' && taskID) {
+      const timestamp = new Date().getTime();
       try {
         await addDoc(
           collection(firestore, 'tasks', value, value, taskID, 'Updates'),
           {
             UpdateText: newUpdate,
             UpdatedBy: selectedUserText,
-            UpdatedTimetamp: new Date().getTime,
+            UpdatedTimestamp: timestamp,
           }
         );
         setNewUpdate('');
