@@ -58,7 +58,7 @@ const TaskList = () => {
   }, [value]);
 
   const addItem = async ({ title, description }) => {
-    if (title.trim() !== '') {
+    if (!title.length) {
       try {
         await addDoc(collection(firestore, 'tasks', value, value), {
           title: title,
